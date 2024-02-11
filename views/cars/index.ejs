@@ -1,0 +1,133 @@
+<!-- views/cars/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Cars</title>
+  <style>
+    /* styles/style.css */
+    body {
+      zoom: 90%;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000000;
+    }
+  
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+      margin-left: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-bottom: 1rem;
+    }
+  
+    .car-card {
+      background-color: #000000;
+      color: #b69f9f;
+      display: flex;
+      flex-direction: column;
+      border-radius: 23px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      overflow: hidden;
+      transition: transform 0.2s ease-in-out;
+      border: 2px solid wheat;
+    }
+  
+    .car-card:hover {
+      transform: scale(1.05);
+    }
+  
+    .card-image {
+      width: 100%;
+      height: 60%;
+      overflow: hidden;
+      border-radius: 23px 23px 0 0;
+    }
+  
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  
+    .card-details {
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+  
+    .card-details h2,
+    .card-details p,
+    .card-details a {
+      color: rgb(255, 255, 255);
+      font-weight: bolder;
+    }
+  
+    .card-details a {
+      text-decoration: none;
+      background: rgb(255, 255, 255);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      display: inline-block;
+      color: rgb(0, 0, 0) !important;
+      width: 80%;
+      text-align: center;
+    }
+  
+    .card-details a:hover {
+      background: #333;
+    }
+  
+    h1 {
+      letter-spacing: 8px;
+      font-size: 4rem;
+      margin-top: 1rem;
+      text-align: center;
+      font-weight: bolder;
+      color: white;
+    }
+  
+    @media screen and (max-width: 768px) {
+      .card-container {
+        grid-template-columns: 1fr;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        gap: 12px;
+      }
+
+      .car-card {
+        width: calc(100% - 4rem); /* Adjust the width based on your preference */
+      }
+    }
+  </style>
+</head>
+<body>
+  <%- include('../partials/navigation.ejs') %>
+
+  <div class="car-list">
+    <h1>PICK YOUR FAVOURITE CAR</h1>
+    <div class="card-container">
+      <% cars.forEach(car => { %>
+        <div class="car-card">
+          <div class="card-image">
+            <!-- Display the last image in the array -->
+            <img src="<%= car.image && car.image.length ? car.image[car.image.length - 1].url : '/default-image.jpg' %>" alt="<%= car.name %>'s Image">
+          </div>
+          <div class="card-details">
+            <h2><%= car.name %></h2>
+            <p>Car: <%= car.subject %></p>
+            <p>Price: R<%= car.price || 400 %></p>
+            <a href="/cars/<%= car._id %>">Details</a>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+
+  <%- include('../partials/footer.ejs') %>
+</body>
+</html>

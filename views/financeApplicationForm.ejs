@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Application Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+    body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            zoom: 80%;
+        }
+
+        .form-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            left: 30%;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        select {
+            appearance: none;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-label input {
+            margin-right: 8px;
+        }
+
+        /* Consent checkboxes and labels */
+        input[type="checkbox"] {
+            margin-right: 8px;
+        }
+
+        /* Section titles */
+        h2 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Person Details Styling */
+        input[type="tel"],
+        input[type="email"],
+        textarea {
+            resize: vertical;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+
+        /* Styling for Graduate radio buttons */
+input[type="radio"][name="graduate"] {
+    display: none;
+}
+
+/* Style for the radio button container */
+.radio-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for the radio button label */
+.radio-label {
+    margin-right: 15px;
+    color: #555;
+}
+
+/* Styling for the radio button itself */
+.radio-input {
+    margin-right: 5px;
+}
+
+/* Styling for the checked state of the radio button */
+.radio-input:checked + .radio-label::before {
+    content: '\2022'; /* Unicode character for a bullet point */
+    color: #4caf50; /* Color for the checked state */
+    font-size: 20px;
+    line-height: 1em;
+}
+
+    </style>
+</head>
+<body>
+    <%- include ('./partials/navigation.ejs') %>
+   
+        <div class="form-container">
+            <form action="submit.php" method="post" enctype="multipart/form-data">
+                <!-- Vehicle Details -->
+                <div class="form-section">
+                    <h2>Vehicle Details</h2>
+                    <label for="vehicleInterest">Vehicle interested in:</label>
+                    <input type="text" id="vehicleInterest" name="vehicleInterest" required>
+    
+                    <label for="blacklisted">Are you blacklisted?</label>
+                    <select id="blacklisted" name="blacklisted" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+    
+                    <label for="tradeIn">Do you have a trade-in?</label>
+                    <select id="tradeIn" name="tradeIn" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+    
+                    <label for="depositAmount">Deposit amount (Optional):</label>
+                    <input type="text" id="depositAmount" name="depositAmount">
+    
+                    <label for="hearAboutUs">Where did you hear about us?</label>
+                    <input type="text" id="hearAboutUs" name="hearAboutUs">
+                </div>
+    
+                <!-- Personal Details -->
+                <div class="form-section">
+                    <h2>Personal Details</h2>
+                    <!-- Include relevant input fields for this section -->
+                    <label for="fullName">Full name:</label>
+    <input type="text" id="fullName" name="fullName" required>
+
+    <!-- Full Name as written on ID -->
+    <label for="fullNameOnID">Full name as written on ID:</label>
+    <input type="text" id="fullNameOnID" name="fullNameOnID" required>
+
+    <!-- ID Number -->
+    <label for="idNumber">ID Number:</label>
+    <input type="text" id="idNumber" name="idNumber" required>
+
+    <!-- Gender -->
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <!-- Add other gender options as needed -->
+    </select>
+
+    <!-- Graduate -->
+    <div class="radio-container">
+        <label for="">
+            Graduate
+             </label>
+        <!-- Yes option -->
+        <input type="radio" id="graduateYes" name="graduate" value="Yes" required class="radio-input">
+        <label for="graduateYes" class="radio-label">Yes</label>
+        <!-- No option -->
+        <input type="radio" id="graduateNo" name="graduate" value="No" required class="radio-input">
+        <label for="graduateNo" class="radio-label">No</label>
+    </div>
+
+    <!-- Income Tax Number -->
+    <label for="incomeTaxNumber">Income tax number:</label>
+    <input type="text" id="incomeTaxNumber" name="incomeTaxNumber">
+
+    <!-- Telephone Number (Home) -->
+    <label for="telephoneNumberHome">Telephone number (home):</label>
+    <input type="tel" id="telephoneNumberHome" name="telephoneNumberHome">
+
+    <!-- Cellphone Number -->
+    <label for="cellphoneNumber">Cellphone number:</label>
+    <input type="tel" id="cellphoneNumber" name="cellphoneNumber" required>
+
+    <!-- Email Address -->
+    <label for="emailAddress">Email Address:</label>
+    <input type="email" id="emailAddress" name="emailAddress" required>
+
+    <!-- Address -->
+    <label for="address">Address:</label>
+    <textarea id="address" name="address" rows="4" required></textarea>
+
+    <!-- Duration at Current Address -->
+    <label for="addressDuration">How long have you lived at the above address?</label>
+    <input type="text" id="addressDuration" name="addressDuration" placeholder="Years and months if applicable">
+
+    <!-- Driver's License -->
+    <label for="driverLicense">Do you have a driver's license?</label>
+    <select id="driverLicense" name="driverLicense" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+
+    <!-- Parents' Driver's License -->
+    <label>Does your Mother or Father have a driver's license?</label>
+    <input type="radio" id="parentDriverLicenseYes" name="parentDriverLicense" value="Yes" required>
+    <label for="parentDriverLicenseYes">Yes</label>
+    <input type="radio" id="parentDriverLicenseNo" name="parentDriverLicense" value="No" required>
+    <label for="parentDriverLicenseNo">No</label>
+    
+                    <!-- Add other personal details as per your requirements -->
+    
+                </div>
+    
+                <!-- Employment Details -->
+                <div class="form-section">
+                    <h2>Employment Details</h2>
+                    <!-- Include relevant input fields for this section -->
+                    <label for="companyName">Company name:</label>
+                    <input type="text" id="companyName" name="companyName" required>
+                
+                    <!-- Date Started at this Company -->
+                    <label for="dateStarted">Date started at this company:</label>
+                    <input type="date" id="dateStarted" name="dateStarted" required>
+                
+                    <!-- Job Title -->
+                    <label for="jobTitle">Job Title:</label>
+                    <input type="text" id="jobTitle" name="jobTitle" required>
+                
+                    <!-- Pay Date -->
+                    <label for="payDate">Pay date:</label>
+                    <input type="text" id="payDate" name="payDate" required>
+                
+                    <!-- Telephone Number -->
+                    <label for="employmentTelNumber">Telephone number:</label>
+                    <input type="tel" id="employmentTelNumber" name="employmentTelNumber" required>
+                
+                    <!-- Supervisor -->
+                    <label for="supervisor">Supervisor:</label>
+                    <input type="text" id="supervisor" name="supervisor" required>
+                
+                    <!-- Company Street Address -->
+                    <label for="companyStreetAddress">Company street address:</label>
+                    <textarea id="companyStreetAddress" name="companyStreetAddress" rows="4" required></textarea>
+    
+                    <!-- Add other employment details as per your requirements -->
+    
+                </div>
+    
+                <!-- Home Ownership -->
+                <div class="form-section">
+                    <h2>Home Ownership</h2>
+                    <!-- Include relevant input fields for this section -->
+                    <!-- Do you own property? -->
+    <label for="ownProperty">Do you own property?</label>
+    <select id="ownProperty" name="ownProperty" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+
+    <!-- In whose name is the property? -->
+    <label for="propertyOwnership">In whose name is the property?</label>
+    <select id="propertyOwnership" name="propertyOwnership" required>
+        <option value="Own">Own</option>
+        <option value="Other">Other</option>
+    </select>
+
+    <!-- Bond/Rental payment per month -->
+    <label for="bondPayment">Bond/Rental payment per month:</label>
+    <input type="text" id="bondPayment" name="bondPayment" required>
+
+    <!-- Current value of house -->
+    <label for="houseValue">Current value of house:</label>
+    <input type="text" id="houseValue" name="houseValue" required>
+
+    <!-- Bonded via which bank? -->
+    <label for="bondedBank">Bonded via which bank?</label>
+    <input type="text" id="bondedBank" name="bondedBank" required>
+</div>
+
+<!-- Marital Details -->
+<div class="form-section">
+    <h2>Marital Details</h2>
+
+    <!-- Marital Status -->
+    <label for="maritalStatus">Marital Status:</label>
+    <select id="maritalStatus" name="maritalStatus" required>
+        <option value="Single">Single</option>
+        <option value="Married">Married</option>
+        <!-- Add other marital status options as needed -->
+    </select>
+
+    <!-- Date Married -->
+    <label for="dateMarried">Date Married:</label>
+    <input type="date" id="dateMarried" name="dateMarried">
+
+    <!-- Marriage contract -->
+    <label for="marriageContract">Marriage contract:</label>
+    <select id="marriageContract" name="marriageContract">
+        <option value="ANC - Out of community of property">ANC - Out of community of property</option>
+        <option value="COP - In community of property">COP - In community of property</option>
+        <option value="Other">Other</option>
+    </select>
+    
+                    <!-- Add other home ownership details as per your requirements -->
+    
+                </div>
+    
+                <!-- Marital Details -->
+                <div class="form-section">
+                    <h2>Marital Details</h2>
+                    <!-- Include relevant input fields for this section -->
+                    <label for="maritalStatus">Marital Status:</label>
+                    <select id="maritalStatus" name="maritalStatus" required>
+                        <option value="Single">Single</option>
+                        <!-- Add other marital status options as needed -->
+                    </select>
+    
+                    <!-- Add other marital details as per your requirements -->
+    
+                </div>
+    
+                <!-- Spouse Details -->
+                <div class="form-section">
+                    <h2>Spouse Details</h2>
+                    <!-- Include relevant input fields for this section -->
+                    <!-- Full name -->
+    <label for="spouseFullName">Full name:</label>
+    <input type="text" id="spouseFullName" name="spouseFullName" required>
+
+    <!-- Full name as written on ID -->
+    <label for="spouseFullNameOnID">Full name as written on ID:</label>
+    <input type="text" id="spouseFullNameOnID" name="spouseFullNameOnID" required>
+
+    <!-- ID Number -->
+    <label for="spouseIDNumber">ID Number:</label>
+    <input type="text" id="spouseIDNumber" name="spouseIDNumber" required>
+
+    <!-- Cellphone number -->
+    <label for="spouseCellphoneNumber">Cellphone number:</label>
+    <input type="tel" id="spouseCellphoneNumber" name="spouseCellphoneNumber" required>
+
+    <!-- Does your spouse have a driver's license? -->
+    <label for="spouseDriverLicense">Does your spouse have a driver's license?</label>
+    <select id="spouseDriverLicense" name="spouseDriverLicense" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+
+    <!-- Gross Income -->
+    <label for="spouseGrossIncome">Gross Income:</label>
+    <input type="text" id="spouseGrossIncome" name="spouseGrossIncome" required>
+
+    <!-- Net Income -->
+    <label for="spouseNetIncome">Net Income:</label>
+    <input type="text" id="spouseNetIncome" name="spouseNetIncome" required>
+
+    <!-- Bank name -->
+    <label for="spouseBankName">Bank name:</label>
+    <input type="text" id="spouseBankName" name="spouseBankName" required>
+
+    <!-- Bank account number -->
+    <label for="spouseBankAccountNumber">Bank account number:</label>
+    <input type="text" id="spouseBankAccountNumber" name="spouseBankAccountNumber" required>
+
+    <!-- Spouse Employer -->
+    <label for="spouseEmployer">Spouse Employer:</label>
+    <input type="text" id="spouseEmployer" name="spouseEmployer" required>
+
+    <!-- Work Phone -->
+    <label for="spouseWorkPhone">Work Phone:</label>
+    <input type="tel" id="spouseWorkPhone" name="spouseWorkPhone" required>
+
+    <!-- Work address -->
+    <label for="spouseWorkAddress">Work address:</label>
+    <input type="text" id="spouseWorkAddress" name="spouseWorkAddress" required>
+</div>
+
+<!-- Next of Kin -->
+<div class="form-section">
+    <h2>Next of Kin</h2>
+
+    <!-- Nearest relative or friend in South Africa not living with you. -->
+    <label for="nextOfKinName">Nearest relative or friend in South Africa not living with you:</label>
+    <input type="text" id="nextOfKinName" name="nextOfKinName" required>
+
+    <!-- Relationship -->
+    <label for="nextOfKinRelationship">Relationship:</label>
+    <input type="text" id="nextOfKinRelationship" name="nextOfKinRelationship" required>
+
+    <!-- Telephone Number -->
+    <label for="nextOfKinPhoneNumber">Telephone Number:</label>
+    <input type="tel" id="nextOfKinPhoneNumber" name="nextOfKinPhoneNumber" required>
+
+    <!-- First name -->
+    <label for="nextOfKinFirstName">First name:</label>
+    <input type="text" id="nextOfKinFirstName" name="nextOfKinFirstName" required>
+
+    <!-- Surname -->
+    <label for="nextOfKinSurname">Surname:</label>
+    <input type="text" id="nextOfKinSurname" name="nextOfKinSurname" required>
+
+    <!-- Street Address -->
+    <label for="nextOfKinStreetAddress">Street Address:</label>
+    <input type="text" id="nextOfKinStreetAddress" name="nextOfKinStreetAddress" required>
+                    <!-- Add other spouse details as per your requirements -->
+    
+                </div>
+    
+                <!-- Next of Kin -->
+                <div class="form-section">
+                    <h2>Next of Kin</h2>
+                    <!-- Include relevant input fields for this section -->
+                    <label for="nextOfKinFullName">Next of Kin Full name:</label>
+                    <input type="text" id="nextOfKinFullName" name="nextOfKinFullName">
+    
+                    <!-- Add other next of kin details as per your requirements -->
+    
+                </div>
+    
+                <!-- Personal Bank Details -->
+                <div class="form-section">
+                    <h2>Personal Bank Details</h2>
+                    <!-- Include relevant input fields for this section -->
+                    <label for="bankName">Bank name:</label>
+                    <input type="text" id="bankName" name="bankName" required>
+    
+                    <!-- Add other personal bank details as per your requirements -->
+    
+                </div>
+    
+                <!-- Previous Vehicle Finance -->
+                <div class="form-section">
+                    <h2>Previous Vehicle Finance</h2>
+                    <!-- Include relevant input fields for this section -->
+                    <label for="previousVehicleFinance">Do you have previous vehicle finance?</label>
+                    <select id="previousVehicleFinance" name="previousVehicleFinance" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+    
+                    <!-- Add other previous vehicle finance details as per your requirements -->
+    
+                </div>
+    
+                <!-- Income Details -->
+                <div class="form-section">
+                    <h2>Income Details</h2>
+                    <!-- Include relevant input fields for this section -->
+                    <label for="grossSalary">Gross Salary:</label>
+                    <input type="text" id="grossSalary" name="grossSalary" required>
+    
+                    <!-- Add other income details as per your requirements -->
+    
+                </div>
+    
+                <!-- Personal Expenses -->
+                <div class="form-section">
+                    <h2>Personal Expenses</h2>
+                    <!-- Include relevant input fields for this section -->
+                    <label for="bondPayment">Bond Payment / Rent:</label>
+                    <input type="text" id="bondPayment" name="bondPayment" required>
+    
+                    <!-- Add other personal expense details as per your requirements -->
+    
+                </div>
+    
+                <!-- Document Upload and Consent -->
+                <div class="form-section">
+                    <h2>Document Upload and Consent</h2>
+                    <!-- Include relevant input fields for this section -->
+                    <label for="payslips">3 Months Payslips:</label>
+                    <input type="file" id="payslips" name="payslips" accept=".pdf, .doc, .docx" required>
+    <!-- Copy of ID -->
+    <label for="idCopy">Copy of ID</label>
+    <input type="file" id="idCopy" name="idCopy">
+
+    <!-- Proof of Address -->
+    <label for="proofOfAddress">Proof of Address (Account or utility bill not older than three months)</label>
+    <input type="file" id="proofOfAddress" name="proofOfAddress">
+
+    <!-- Driver's License -->
+    <label for="driverLicense">License if available</label>
+    <input type="file" id="driverLicense" name="driverLicense">
+
+    <!-- Bank Statements -->
+    <label for="bankStatements">Three months bank statement (Stamped)</label>
+    <input type="file" id="bankStatements" name="bankStatements">
+
+    <!-- Spouse Documents (if married) -->
+    <label for="spousePayslip">If married – spouse payslip and copy of ID (Include licence if available)</label>
+    <input type="file" id="spousePayslip" name="spousePayslip">
+
+    <div class="form-section">
+        <h2>Privacy Disclosure and Acknowledgement Consent</h2>
+    
+        <!-- Privacy Disclosure Consent Checkbox -->
+        <label>
+            <input type="checkbox" name="privacyConsent" required>
+            I understand and acknowledge...
+        </label>
+    </div>
+                        <!-- Add other document upload fields as per your requirements -->
+        
+                    </div>
+        
+                    <!-- Privacy Disclosures and Consents -->
+                    <div class="form-section">
+                        <h2>Privacy Disclosures and Consents</h2>
+                        <!-- Include relevant input fields for this section -->
+                        <label for="privacyDisclosure">Privacy Disclosure and Acknowledgement Consent:</label>
+                        <input type="checkbox" id="privacyDisclosure" name="privacyDisclosure" required>
+                        <label for="bankStatementsConsent">Secure-X Bank Statements Consent (IDX):</label>
+                        <input type="checkbox" id="bankStatementsConsent" name="bankStatementsConsent" required>
+                        <label for="incomeVerificationConsent">Income Verification Consent (IVX):</label>
+                        <input type="checkbox" id="incomeVerificationConsent" name="incomeVerificationConsent" required>
+                        <label for="proofOfResidenceConsent">Proof Of Residence Consent (FICA-X):</label>
+                        <input type="checkbox" id="proofOfResidenceConsent" name="proofOfResidenceConsent" required>
+        
+    
+                        
+                    </div>
+
+</div>
+
+<!-- Privacy Disclosure and Acknowledgement Consent -->
+
+    
+               <!-- Privacy Disclosure and Acknowledgement Consent -->
+        <%- include ('./partials/footer.ejs') %>
+</body>
+</html>

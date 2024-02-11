@@ -1,0 +1,42 @@
+<!-- views/cars/edit.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/style.css">
+  <title>Edit this car</title>
+</head>
+<body>
+
+  <%- include ('../partials/navigation.ejs') %>
+
+  <div class="edit-car-form">
+    <h1>Edit Car</h1>
+    <form action="/cars/<%= car._id %>/edit" method="POST" enctype="multipart/form-data">
+
+      <!-- Name input -->
+      <label for="name">Name:</label>
+      <input type="text" name="name" value="<%= car.name %>" required>
+      
+      <!-- Subject input -->
+      <label for="subject">Subject:</label>
+      <input type="text" name="subject" value="<%= car.subject %>" required>
+
+      <!-- Add file input for updating image -->
+      <label for="carImage">Update Image:</label>
+      <input type="file" name="carImage" accept="image/*">
+
+      <!-- Display the last image in the array -->
+      <img src="<%= car.image && car.image.length ? car.image[car.image.length - 1].url : '/default-image.jpg' %>" alt="Car Image">
+
+      <!-- Add other input fields as needed -->
+      <input type="hidden" name="_method" value="PUT">
+      <button type="submit">Update Car</button>
+    </form>
+    <a href="/cars/<%= car._id %>">Cancel</a>
+  </div>
+
+  <%- include ('../partials/footer.ejs') %>
+</body>
+</html>

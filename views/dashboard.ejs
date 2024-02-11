@@ -1,0 +1,20 @@
+<!-- views/dashboard.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/style.css">
+  <title><%= pageTitle %></title>
+</head>
+<body>
+  <%- include ('./partials/navigation.ejs') %>
+
+  <div class="dashboard">
+    <h1>Welcome to the Dashboard, <%= user.username %>!</h1>
+    <!-- You can display additional dashboard content here -->
+  </div>
+
+  <%- include ('./partials/footer.ejs') %>
+</body>
+</html>

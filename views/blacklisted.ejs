@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blacklist Form</title>
+    <!-- Add your stylesheets or styles here -->
+    <style>
+        body {
+            background-color: #000000;
+            zoom: 80%;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            height: 150vh;
+        
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            margin-top: 5rem;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .card-heading {
+            font-size: 1.2em;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <%- include('./partials/navigation.ejs') %>
+    <div class="card">
+        <h1>Blacklist Application Form</h1>
+        <p class="card-heading">For People Who Are Blacklisted</p>
+        
+        <!-- Update your form fields -->
+        <form action="/blacklisted" method="post">
+            <!-- Other form fields -->
+            <input type="text" name="firstName" placeholder="First Name" required>
+            <input type="text" name="lastName" placeholder="Last Name" required>
+
+            <label for="idNumber">ID Number:</label>
+            <input type="text" id="idNumber" name="idNumber" placeholder="ID Number" required>
+
+            <label for="netSalary">Net Salary:</label>
+            <input type="number" id="netSalary" name="netSalary" placeholder="Net Salary" required>
+
+            <label for="cellNumber">Cell Number:</label>
+            <input type="tel" id="cellNumber" name="cellNumber" placeholder="Cell Number" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" placeholder="Email Address" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

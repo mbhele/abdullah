@@ -1,0 +1,20 @@
+<!-- Display the car list -->
+<div class="car-list">
+  <h1>PICK YOUR FAVOURITE CAR</h1>
+  <div class="card-container">
+    <% cars.forEach(car => { %>
+      <div class="car-card" data-make="<%= car.make %>" data-model="<%= car.model %>" data-price="<%= car.price %>">
+        <div class="card-image">
+          <!-- Display the last image in the array -->
+          <img src="<%= car.image && car.image.length ? car.image[car.image.length - 1].url : '/default-image.jpg' %>" alt="<%= car.name %>'s Image">
+        </div>
+        <div class="card-details">
+          <h2><%= car.name %></h2>
+          <p>Car: <%= car.subject %></p>
+          <p>Price: R<%= car.price || 400 %></p>
+          <a href="/cars/<%= car._id %>">Details</a>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</div>

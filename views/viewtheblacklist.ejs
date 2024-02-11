@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blacklist Entries</title>
+  <!-- Add your stylesheets or styles here -->
+  <style>
+    body{
+        background-color: #1a537b;
+    }
+  </style>
+</head>
+<body>
+    <%- include ('./partials/navigation.ejs') %>
+  <h1>Blacklist Entries</h1>
+
+  <% if (blacklistEntries.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Last Name</th>
+          <th>First Name</th>
+          <th>ID Number</th>
+          <th>Net Salary</th>
+          <th>Cell Number</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% blacklistEntries.forEach(entry => { %>
+          <tr>
+            <td><%= entry.lastName %></td>
+            <td><%= entry.firstName %></td>
+            <td><%= entry.idNumber %></td>
+            <td><%= entry.netSalary %></td>
+            <td><%= entry.cellNumber %></td>
+            <td><%= entry.email %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>No entries in the blacklist.</p>
+  <% } %>
+  <%- include ('./partials/footer.ejs') %>
+  <!-- Add your scripts or script references here -->
+
+</body>
+</html>

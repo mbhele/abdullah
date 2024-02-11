@@ -1,0 +1,475 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+
+
+button {
+    padding: 10px;
+    background-color: #485dff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#calculatorModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 30px; /* Added padding */
+    border: 1px solid #ccc;
+    z-index: 1;
+    max-width: 400px;
+    width: 100%;
+    opacity: 0;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+.blacklisted {
+    background-color: black;
+    font-size: 16px;
+  padding: 10px 10px; /* Adjust padding for a button-like appearance */
+  position: relative;
+   top: -0.5rem;
+  border-radius: 5px; /* Add rounded corners */
+  }
+  
+  .blacklisted a {
+    color: rgb(121, 6, 6);
+    font-weight: bold;
+   
+  }
+
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+#calculatorModal h2 {
+    margin-bottom: 20px; /* Added margin for form heading */
+}
+
+#financeForm {
+    max-height: 40vh; /* Set maximum height to 40% of the viewport height */
+    overflow-y: auto; /* Add overflow for small screens */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px; /* Increased margin */
+    text-align: left;
+}
+
+input {
+    width: calc(100% - 20px); /* Adjust width to account for padding */
+    padding: 10px;
+    margin-bottom: 20px; /* Increased margin */
+    box-sizing: border-box;
+}
+
+#result {
+    margin-top: 20px;
+}
+
+.form-btn {
+    padding: 12px;
+    background-color: #485dff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.form-btn:hover {
+    background-color: #485dff;
+}
+
+#contact-topinfo {
+    /* background-color: #3498db; */
+    color: #ffffff;
+    text-align: left;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+#contact-topinfo h1 {
+    margin: 3px 0;
+    font-size: 20px;
+}
+
+#contact-topinfo p {
+    margin: 3px 0;
+}
+
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Place the video behind other elements */
+    filter: brightness(30%); /* Adjust the brightness of the video */
+}
+
+/* NAVIGATION */
+
+nav {
+    margin-top: -1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+li {
+    margin: 0 15px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #45a049;
+}
+
+/* Add this CSS to your existing styles */
+
+/* Apply Now link styles */
+#applyNowLink {
+text-decoration: none;
+font-weight: bold;
+font-size: 16px;
+padding: 10px 20px; /* Adjust padding for a button-like appearance */
+color: white; /* Text color */
+border-radius: 5px; /* Add rounded corners */
+animation: colorChange 5s infinite; /* Animation for continuous color change */
+}
+
+@keyframes colorChange {
+0% { background-color:  #740e02; } /* Initial color */
+25% { background-color: #3498db; } /* 25% through the animation */
+50% { background-color: #9b1102; } /* 50% through the animation */
+75% { background-color: #3498db;} /* 75% through the animation */
+100% { background-color: #b10000;} /* Final color, loop back to the beginning */
+}
+
+#applyNowLink:hover {
+background-color: #45a049; /* Override animation on hover */
+}
+
+#searchContainer {
+    max-width: 100%;
+    margin: 20px;
+    padding: 20px;
+    background-color: #3498db;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 8rem;
+    width: 100%;
+}
+
+
+hr {
+    border-color: #3498db; /* You can change the color code to your desired color */
+}
+
+#searchHeading {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    text-transform: capitalize;
+}
+.dropdownContainer {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+margin-bottom: 20px;
+}
+
+/* Custom styles for the dropdowns */
+.filterDropdown {
+flex: 1;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+background-color: #fff;
+font-size: 16px;
+color: #333;
+margin: 0 5px 10px 5px;
+transition: border-color 0.3s ease, background-color 0.3s ease;
+width: 60%;
+
+}
+
+.filterDropdown:hover {
+border-color: #3498db;
+}
+
+#searchButton {
+padding: 10px;
+background-color: #3498db;
+color: #fff;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+#searchButton:hover {
+background-color: #45a049;
+}
+
+.filterDropdown {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 16px;
+    color: #333;
+    margin: 0 5px 10px 5px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.filterDropdown:hover {
+    border-color: #3498db;
+}
+
+
+#searchButton {
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#searchButton:hover {
+    background-color: #45a049;
+}
+
+.dropdownContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #3498db;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+.carCard {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    width: calc(25% - 20px); /* Set the width to 25% of the container with 20px gap */
+    margin: 0;
+    background-color: #ffffff;
+}
+
+.carCard:hover {
+    transform: scale(1.05);
+}
+
+.carImage {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    /* margin-left: 30rem; */
+}
+
+.carDetails {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Additional Styles for Modal */
+.modal-content {
+    text-align: center;
+}
+
+
+#imageGallery{display: flex;gap: 20px; /* Adjust the gap value as needed */}
+
+
+#imageGallery img {
+    max-width: 100%; /* Ensure images don't exceed their container's width */
+    height: auto; /* Maintain aspect ratio */
+}
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 25px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #aaa;
+}
+
+
+/* LOGIN */
+#loginContainer {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Responsive styles for smaller screens */
+@media only screen and (max-width: 600px) {
+    body {
+        margin: 10px;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    li {
+        margin: 5px 0;
+    }
+
+    #calculatorModal {
+        max-width: 100%;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    #searchContainer {
+        margin-top: 4rem;
+    }
+
+       #contact-topinfo {
+flex-direction: column;
+align-items: flex-start;
+}
+
+#contact-topinfo p {
+margin: 5px 0; /* Adjust margin for paragraphs in column layout */
+}
+
+
+
+#calculatorModal {
+max-width: 60%;
+position: relative;
+bottom:-10rem;
+z-index: 999;
+background-color: #45a049;
+
+}
+
+#financeForm {
+max-height: none; /* Reset max-height for small screens */
+background-color: #45a049;
+}
+
+label {
+text-align: center; /* Center align labels */
+}
+
+input {
+width: 80%;
+margin: 10px 0; /* Adjust margin for better spacing */
+}
+
+.form-btn {
+width: 80%;
+}
+
+#result {
+margin-top: 1px;
+}
+
+#imageGallery {
+    flex-direction: column; /* Change to a column layout on smaller screens */
+    width: 100%;
+}
+#imageGallery {
+    flex-direction: column; /* Change to a column layout on smaller screens */
+}
+
+#imageGallery img {
+    width: 100%; /* Set the width to 100% for small screens */
+}
+
+.carCard {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    /* border-radius: 10px; */
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    width: calc(100% - 20px);
+    margin: 0;
+    background-color: #ffffff;
+}
+}
+
+#logo{
+    height: 1vh;
+}

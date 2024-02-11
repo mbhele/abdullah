@@ -1,0 +1,63 @@
+<!-- views/cars/create.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/style.css">
+  <title>Create Car</title>
+
+  <style>
+  body{
+    background-color: black;
+    color: white;
+  }
+
+
+  </style>
+</head>
+<body>
+  <%- include ('../partials/navigation.ejs') %>
+
+  <div class="create-car-form">
+    <h1>Create Car</h1>
+    <form action="/cars/create" method="post" enctype="multipart/form-data">
+      
+      <!-- Name input -->
+      <label for="name">Name:</label>
+      <input type="text" name="name" required>
+      
+      <!-- Subject input -->
+      <label for="subject">Subject:</label>
+      <input type="text" name="subject" required>
+
+      <!-- Make input -->
+      <label for="make">Make:</label>
+      <input type="text" name="make" required>
+
+      <!-- Model input -->
+      <label for="model">Model:</label>
+      <input type="text" name="model" required>
+
+      <!-- Price input -->
+      <label for="price">Price:</label>
+      <input type="text" name="price" required>
+
+      <!-- Image upload input -->
+      <label for="carImage">Image:</label>
+      <input type="file" name="carImage" multiple> <!-- Allow multiple image uploads -->
+
+      <!-- Other form fields -->
+      <!-- Add other input fields as needed -->
+
+      <!-- Submit button -->
+      <button type="submit">Create Car</button>
+    </form>
+
+    <!-- Back to cars list link -->
+    <a href="/cars">Back to Cars List</a>
+  </div>
+
+  <% include ('../partials/footer.ejs') %>
+</body>
+</html>

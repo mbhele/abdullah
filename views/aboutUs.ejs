@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            background-color: #000000;
+            zoom: 80%;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            height: 50vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #25d366;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #25d366;
+            font-size: 2em;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .whatsapp-btn {
+            background-color: #25d366;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Add box shadow to sections (cards) */
+        section {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .why-choose-container {
+        display: flex;
+        justify-content: space-evenly;
+  
+    }
+
+    .why-choose-item {
+        width: 48%; /* Two cards in a row for larger screens */
+        background-color: #333;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h3 {
+        color: #25d366;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: #ccc;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .why-choose-item {
+            width: 100%; /* One card for smaller screens */
+        }
+    }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <%- include ('./partials/navigation.ejs') %>
+
+    <header>
+        <h1>About Us</h1>
+    </header>
+
+    <div class="about-container">
+
+        <section>
+            <h2>Our Story</h2>
+            <p>
+                Welcome to <strong>Your Business Name</strong>, a family-owned business with a rich legacy dating back to
+                2003. With over 35 years of experience in delivering excellence, we take pride in being a trusted source
+                for quality products that won't break the bank.
+            </p>
+        </section>
+
+        <section>
+            <h2>Our Mission</h2>
+            <p>
+                Established in 2003, <strong>Your Business Name</strong> is a testament to our unwavering commitment to
+                providing the best in the market. As a family-owned business, we believe in values that have been
+                passed down through generations — values of integrity, quality, and affordability.
+            </p>
+        </section>
+        <section>
+            <h2 style="color: #25d366;">Why Choose Us?</h2>
+            <div class="why-choose-container">
+                <div class="why-choose-item">
+                    <h3>35 Years of Expertise</h3>
+                    <p>With over three decades of experience, we have honed our skills to curate a selection of products that reflect our dedication to quality.</p>
+                </div>
+        
+                <div class="why-choose-item">
+                    <h3>Family-Owned</h3>
+                    <p>As a family-owned business, we understand the importance of trust and accountability. You're not just a customer; you're part of our extended family.</p>
+                </div>
+        
+                <div class="why-choose-item">
+                    <h3>Quality Assurance</h3>
+                    <p>We go the extra mile to ensure that every product we offer meets the highest standards of quality. We believe that you deserve nothing but the best.</p>
+                </div>
+        
+                <div class="why-choose-item">
+                    <h3>Affordable Excellence</h3>
+                    <p>Our commitment to affordability doesn't mean compromising on quality. We believe that everyone should have access to premium products without breaking the bank.</p>
+                </div>
+            </div>
+        </section>
+        
+
+        <section>
+            <h2>Join Our Family</h2>
+            <p>
+                Discover the difference that quality and affordability can make in your life. Join the <strong>Your
+                    Business Name</strong> family today, where every purchase is a step towards excellence. Thank you for
+                choosing <strong>Your Business Name</strong>.
+            </p>
+        </section>
+
+    </div>
+
+    <%- include ('./partials/footer.ejs') %>
+
+</body>
+
+</html>
