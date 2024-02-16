@@ -1,33 +1,68 @@
+<!-- Your EJS file -->
+
 <style>
-  /* styles/style.css */
-
-
-  body{
+  body {
     margin: 0;
-  
-  }
-  .footer {
-    background-color: #4caf50 ;
-    color: white;
-    text-align: center;
-    padding: 10px; /* Adjust padding as needed */
-   
+    padding-bottom: 10px;
+    min-height: 100vh;
     position: relative;
-    bottom: -70px;
+  }
+
+  .footer {
+    background-color: #ffff00;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    flex-wrap: wrap; /* Allow items to wrap to the next row on smaller screens */
   }
 
   .footer img {
-    max-height: 150%; /* Ensure the image doesn't exceed the height of the container */
-    max-width: 100%; /* Ensure the image doesn't exceed the width of the container */
-    display: block;
-    margin: 0 auto; /* Center the image horizontally */
-    margin-bottom: 2rem;
+    height: 2rem;
+    margin-left: 10px;
+  }
+
+  .social-media-links {
+    display: flex;
+    gap: 10px;
+  }
+
+  .social-media-links a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }
+
+  @media screen and (max-width: 600px) {
+    .footer {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .social-media-links {
+      flex-direction: row; /* Display links in a row on smaller screens */
+      justify-content: center; /* Center the links horizontally */
+    }
   }
 </style>
 
-<div class="footer">
-    <!-- Your footer content goes here -->
-    <img style="height: 2rem;" src="/images/logo.svg" alt="Logo">
+<!-- Footer section -->
 
+<div class="footer">
+  <img src="/images/logo.svg" alt="Logo">
+  <p>&copy; 2024 Abdullah's Car Sales</p>
+  <p>Contact us: acauto86@gmail.com</p>
+  <div class="social-media-links">
+    <a href="https://www.tiktok.com/@abdullahs.car.sal" target="_blank">TikTok <i class="fa-brands fa-tiktok"></i></a>
+    <!-- <a href="https://www.instagram.com/" target="_blank">Instagram</a> -->
+    <a href="https://www.facebook.com/profile.php?id=100031928482318" target="_blank">Facebook <i class="fa-brands fa-facebook"></i></a>
+    <script src="https://use.fontawesome.com/d6b504fbd4.js"></script>
+    <!-- <a href="https://www.youtube.com/" target="_blank">YouTube</a> -->
+    <!-- Add more social media links as needed -->
+  </div>
 </div>

@@ -15,18 +15,39 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function generateCarCard(car) {
+        const cardWrapper = document.createElement('div');
+        cardWrapper.classList.add('card-wrapper');
+    
         const card = document.createElement('div');
         card.classList.add('car-card');
+        card.style.width = '100%'; // Adjust the width as needed
+        card.style.boxSizing = 'border-box'; // Include padding and border in the width
+        card.style.borderRadius = '8px'; // Set border-radius for rounded corners
+        card.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)'; // Add box shadow for a subtle effect
+        card.style.transition = 'transform 0.3s'; // Add transition effect on hover
+        card.style.backgroundColor = '#ffff00'; // Set background color
+        card.style.overflow = 'hidden'; // Hide overflow content
     
         const carImage = document.createElement('div');
         carImage.className = 'card-image';
+    
         const imageElement = document.createElement('img');
         imageElement.src = car.image[0].url; // Assuming the first image URL is the main image
         imageElement.alt = `${car.make} ${car.model}`;
+        imageElement.style.width = '100%'; // Use 100% width to fill the card width
+        imageElement.style.height = '100%'; // Use 100% height to fill the card height
+        imageElement.style.objectFit = 'cover'; // Maintain aspect ratio and cover the entire container
+    
         carImage.appendChild(imageElement);
     
         const carDetails = document.createElement('div');
         carDetails.className = 'card-details';
+        carDetails.style.display = 'flex';
+        carDetails.style.flexDirection = 'column';
+        carDetails.style.alignItems = 'center';
+        carDetails.style.justifyContent = 'center';
+        carDetails.style.height = '100%';
+        carDetails.style.padding = '10px';
     
         const makeModel = document.createElement('h2');
         makeModel.textContent = `${car.make} ${car.model}`;
@@ -34,10 +55,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const price = document.createElement('p');
         price.textContent = `Price: ${car.price}`;
     
-        // "View More" button
         const viewMoreButton = document.createElement('button');
         viewMoreButton.textContent = 'View More';
-        viewMoreButton.addEventListener('click', () => handleViewMore(car._id)); // Pass the car ID to the function
+        viewMoreButton.className = 'view-button';
+        viewMoreButton.addEventListener('click', () => handleViewMore(car._id));
     
         carDetails.appendChild(makeModel);
         carDetails.appendChild(price);
@@ -46,8 +67,13 @@ document.addEventListener('DOMContentLoaded', function () {
         card.appendChild(carImage);
         card.appendChild(carDetails);
     
-        return card;
+        cardWrapper.appendChild(card);
+    
+        return cardWrapper;
     }
+    
+    
+    
     
     // Example of a custom function to handle "View More" button click
     function handleViewMore(carId) {
@@ -57,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function populateDropdownOptions(cars) {
         const makesDropdown = document.getElementById('filterMakes');
         const modelsDropdown = document.getElementById('filterModels');
-        const pricesDropdown = document.getElementById('filterPrice');
+        // const pricesDropdown = document.getElementById('filterPrice');
 
         // Extract unique makes, models, and price ranges from the car data
         const uniqueMakes = [...new Set(cars.map(car => car.make))];
@@ -74,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
         populateDropdownOptionsHelper(modelsDropdown, uniqueModels);
 
         // Populate prices dropdown
-        populateDropdownOptionsHelper(pricesDropdown, uniquePriceRanges);
+        // populateDropdownOptionsHelper(pricesDropdown, uniquePriceRanges);
     }
 
     function populateDropdownOptionsHelper(dropdown, options) {
@@ -119,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('Performing search...');
         const selectedMake = document.getElementById('filterMakes').value;
         const selectedModel = document.getElementById('filterModels').value;
-        const selectedPriceRange = document.getElementById('filterPrice').value;
+        
 
         fetch('/api/cars')
             .then(response => {
@@ -132,9 +158,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 const filteredCars = cars.filter(car => {
                     const makeMatch = selectedMake === 'all' || car.make.toLowerCase() === selectedMake.toLowerCase();
                     const modelMatch = selectedModel === 'all' || car.model.toLowerCase() === selectedModel.toLowerCase();
-                    const priceMatch = selectedPriceRange === 'all' || isPriceInRange(car.price, selectedPriceRange);
 
-                    return makeMatch && modelMatch && priceMatch;
+                    return makeMatch && modelMatch;
                 });
 
                 // Update the image gallery with filtered cars

@@ -5,6 +5,71 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/styles/style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000000;
+      margin: 0;
+      padding: 0;
+      zoom: 90%;
+      position: relative;
+     
+    
+    }
+
+    .register-form {
+      zoom: 80%;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+    left: 40%;
+    top: 2rem;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error-message {
+      color: #ff0000;
+      margin-top: 10px;
+    }
+  </style>
   <title>Register</title>
 </head>
 <body>
@@ -16,31 +81,27 @@
       <p class="error-message"><%= error %></p>
     <% } %>
     <form action="/register" method="post">
-      <!-- Other form fields -->
       <label for="email">Email:</label>
-        <input type="email" name="email" required>
-        
-        <label for="username">Username:</label>
-        <input type="text" name="username" required>
-        
-        <label for="password">Password:</label>
-        <input type="password" name="password" required>
-        
-        <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" name="confirmPassword" required>
-        
+      <input type="email" name="email" required>
+
+      <label for="username">Username:</label>
+      <input type="text" name="username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" name="password" required>
+
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" name="confirmPassword" required>
+
       <label for="role">Role:</label>
       <select name="role" required>
-        <option value="parent">Parent</option>
-        <option value="tutor">Tutor</option>
-        <option value="student">Student</option>
+        <option value="parent">First time buyer</option>
+        <option value="tutor">Current client</option>
+        <option value="student">I am blacklisted</option>
       </select>
-      
+
       <button type="submit">Register</button>
-      <!-- Remaining form content -->
     </form>
-    
-      
   </div>
 
   <%- include ('../partials/footer.ejs') %>

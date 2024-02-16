@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const nodemailer = require('nodemailer'); // Import nodemailer
 const { ensureAuthenticated } = require('../middleware'); // Adjust the path based on your actual structure
 const academicLevels = ['primary', 'highschool', 'university'];
 const User = require('../models/userModel');
@@ -36,29 +37,62 @@ router.get('/test-current-user', (req, res) => {
     }
 });
 
+const transporter = nodemailer.createTransport({
+    service:'gmail',
+    host: 'smtp.gmail.com',
+    port: 587, // Use the appropriate port
+    secure: false, // Use false if you're not using SSL/TLS
+    auth: {
+      user: '1mbusombhele@gmail.com',
+      pass: 'rxyb eclg vpdy bghh',
+    },
+  })
+  
+
 router.post('/register', async (req, res, next) => {
     const { email, username, password, confirmPassword, role } = req.body;
-
+  
     if (!email) {
-        return res.render('Authi/register', { error: 'Email is required' });
+      return res.render('Authi/register', { error: 'Email is required' });
     }
-
+  
     if (password !== confirmPassword) {
-        return res.render('Authi/register', { error: 'Passwords do not match' });
+      return res.render('Authi/register', { error: 'Passwords do not match' });
     }
-
+  
     const user = new User({ email, username, role });
     user.role = role;
-
-    const registeredUser = await User.register(user, password);
-
-    req.login(registeredUser, (err) => {
+  
+    try {
+      const registeredUser = await User.register(user, password);
+  
+      // Send registration email notification
+      const mailOptions = {
+        from: '1mbusombhele@gmail.com', // replace with your Gmail email
+        to: 'mbusiseni.mbhele@gmail.com', // replace with your desired recipient email (your email address)
+        subject: 'New User Registration',
+        text: `A new user has registered!\n\nUsername: ${username}\nEmail: ${email}\nRole: ${role}`,
+      };
+  
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.error('Error sending email:', error);
+        } else {
+          console.log('Email sent:', info.response);
+        }
+      });
+  
+      req.login(registeredUser, (err) => {
         if (err) return next(err);
         console.log(registeredUser);
         res.redirect('/dashboard');
-    });
-});
-
+      });
+    } catch (error) {
+      console.error(error);
+      req.flash('error', 'An unexpected error occurred. Please try again later.');
+      res.render('error');
+    }
+  });
 router.get('/login', (req, res) => {
     res.render('Authi/login');
 });
@@ -237,33 +271,50 @@ router.get('/blacklisted', (req, res) => {
 });
 
 // Handle form submission
+// Handle form submission
 router.post('/blacklisted', async(req, res) => {
     try {
         const { lastName, firstName, idNumber, netSalary, cellNumber, email } = req.body;
-    
+
         // Validate input fields (you can customize this based on your schema)
         if (!lastName || !firstName || !idNumber || !netSalary || !cellNumber || !email) {
-          req.flash('error', 'All fields are required'); // Flash an error message
-          return res.redirect('/');
+            req.flash('error', 'All fields are required'); // Flash an error message
+            return res.redirect('/');
         }
-    
+
         // Add entry to the blacklist
         const newEntry = await Blacklist.create({
-          lastName,
-          firstName,
-          idNumber,
-          netSalary,
-          cellNumber,
-          email,
+            lastName,
+            firstName,
+            idNumber,
+            netSalary,
+            cellNumber,
+            email,
         });
-    
+
+        // Send email notification
+        const mailOptions = {
+            from: '1mbusombhele@gmail.com',
+            to: 'mbusiseni.mbhele@gmail.com',
+            subject: 'New Blacklist Entry',
+            text: `A new entry has been added to the blacklist!\n\nName: ${firstName} ${lastName}\nID Number: ${idNumber}\nEmail: ${email}`,
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error('Error sending email:', error);
+            } else {
+                console.log('Email sent:', info.response);
+            }
+        });
+
         req.flash('success', 'Entry added to blacklist successfully');
         res.redirect('/');
-      } catch (error) {
+    } catch (error) {
         console.error(error);
         req.flash('error', 'Failed to add entry to blacklist');
         res.redirect('/');
-      }
+    }
 });
 
 
@@ -338,6 +389,88 @@ router.get('/api/cars', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+
+router.post('/cars/:id/send-message', async (req, res) => {
+    try {
+        // Extract form data from request body
+        const { name, email, mobile, area, message } = req.body;
+        const carId = req.params.id; // Extract car ID from params
+
+        // Validate input fields (customize based on your schema)
+        if (!name || !email || !mobile || !area || !message) {
+            req.flash('error', 'All fields are required'); // Flash an error message
+            return res.redirect(`/cars/${carId}/show`); // Redirect to the car details page
+        }
+
+        // Fetch the car details to get the image URL
+        const car = await Car.findById(carId);
+        if (!car) {
+            req.flash('error', 'Car not found'); // Flash an error message
+            return res.redirect('/'); // Redirect to the home page or handle accordingly
+        }
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'acauto86@gmail.com',
+                pass: 'pqgg lpgv ihqs ohfw' // replace with your Gmail password
+            }
+        });
+
+        const imageUrl = car.image[0].url;
+   const mailOptions = {
+    from: 'acauto86@gmail.com',
+    to: 'acauto86@gmail.com',
+    subject: 'I am interested in this car',
+    html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #000; color: #fff; padding: 20px; border-radius: 8px; text-align: center;">
+            <img src="images/company-logo.svg" alt="Company Logo" style="max-width: 100px; margin-bottom: 15px;">
+            <h2 style="color: #25d366; margin-bottom: 10px;">Abdullah's Car Sales</h2>
+            <h3 style="color: #25d366; margin-bottom: 20px;">I am interested in this car</h3>
+            <p style="margin-bottom: 15px;">Name: ${name}</p>
+            <p style="margin-bottom: 15px;">Email: ${email}</p>
+            <p style="margin-bottom: 15px;">Mobile: 
+                <a href="https://wa.me/${mobile}" style="color: #25d366; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 10px 15px; background-color: #fff; border-radius: 5px; margin-top: 5px;">
+                    <img src="images/social.svg" alt="WhatsApp Icon" style="width: 20px; height: 20px; margin-right: 5px;">
+                    Contact on WhatsApp
+                </a>
+            </p>
+            <p style="margin-bottom: 15px;">Area: ${area}</p>
+            <p style="margin-bottom: 15px;">Message: ${message}</p>
+            <img src="${imageUrl}" alt="${car.name}'s Image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+        </div>
+    `
+};
+
+        
+        
+        
+        
+        
+        
+        
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error('Error sending email:', error);
+                req.flash('error', 'Failed to send email notification');
+            } else {
+                console.log('Email sent:', info.response);
+                req.flash('success', 'Message sent successfully');
+                res.render('success'); // Render success.ejs upon successful email send
+
+            }
+        });
+    } catch (error)
+
+{
+    console.error(error);
+    req.flash('error', 'Failed to send message');
+    res.redirect(`/cars/${carId}/show`); // Redirect to the car details page
+}
+}
+);
 
 
 router.get('/aboutus', (req, res) => {

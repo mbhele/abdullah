@@ -17,6 +17,7 @@
       margin: 0;
       padding: 0;
       font-size: 16px;
+      height: 200vh;
     }
 
     #video-background {
@@ -35,12 +36,12 @@
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      background-color: #afee1c;
+      background-color: #ffff00;;
       padding: 20px;
       border-radius: 10px;
-      width: 80%;
+      width: 95%;
       position: absolute;
-      left: 10%;
+      left: 2%;
       margin-top: 1rem;
       margin-left: -1rem;
     }
@@ -59,12 +60,12 @@
     }
 
     .filterDropdown:hover {
-      border-color: #3498db;
+      border-color: #ffff00;;
     }
 
     #searchButton {
       padding: 10px;
-      background-color: #3498db;
+      background-color: #ffff00;
       color: #fff;
       border: none;
       border-radius: 5px;
@@ -83,26 +84,35 @@
     }
 
     .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      justify-content: center;
-      gap: 20px;
-      margin-top: 5rem;
-    }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust minmax value as needed */
+  justify-content: center;
+  gap: 20px;
+  margin-top: 2rem;
+}
 
-    .car-card {
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s;
-      background-color: #ffff00;
-      overflow: hidden;
-      width: 100%;
-      color: white;
-    }
 
-    .car-card:hover {
-      transform: scale(1.05);
-    }
+.card-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px; /* Adjusted margin for better spacing */
+}
+
+.car-card {
+  width: 100%; /* Adjust the width as needed */
+  box-sizing: border-box; /* Include padding and border in the width */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  background-color: #ffff00;
+  overflow: hidden;
+  color: white;
+}
+
+.car-card:hover {
+  transform: scale(1.05);
+}
+
 
     .card-image img {
       width: 100%;
@@ -110,9 +120,7 @@
       object-fit: cover;
     }
 
-    .card-details {
-      padding: 10px;
-    }
+
 
     .card-details h2 {
       margin-bottom: 5px;
@@ -128,7 +136,7 @@
       display: block;
       margin-top: 10px;
       padding: 8px 15px;
-      background-color: #1a537b;
+      background-color: #ffff00;;
       color: #fff;
       text-decoration: none;
       border-radius: 4px;
@@ -139,6 +147,13 @@
       background-color: #1a537b;
     }
 
+    #imageGallery {
+    display: flex !important;
+    gap: 20px !important;
+    width: 90% !important;
+    margin: auto !important;
+    margin-top: 10rem !important;
+}
   </style>
 </head>
 <body>
@@ -160,10 +175,7 @@
       <option value="all">All Models</option>
       <!-- Additional options will be added dynamically based on fetched data -->
     </select>
-    <select id="filterPrice" class="filterDropdown" data-placeholder="Select Price Range">
-      <option value="all">All Prices</option>
-      <!-- Additional options will be added dynamically based on fetched data -->
-    </select>
+
     <button id="searchButton">Search</button>
   </div>
 
@@ -172,6 +184,186 @@
   </div>
 
   <%- include ('./partials/footer.ejs') %>
-  <script src="javascript/home.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function isPriceInRange(price, range) {
+        const [min, max] = range.split('-').map(Number);
+        return price >= min && price <= max;
+    }
+
+    function updateImageGallery(filteredCars) {
+        const imageGallery = document.getElementById('imageGallery');
+        imageGallery.innerHTML = ''; // Clear previous results
+
+        filteredCars.forEach(car => {
+            const carCard = generateCarCard(car);
+            imageGallery.appendChild(carCard);
+        });
+    }
+
+    
+    function generateCarCard(car) {
+    const cardWrapper = document.createElement('div');
+    cardWrapper.classList.add('card-wrapper');
+
+    const card = document.createElement('div');
+    card.classList.add('car-card');
+    card.style.width = '100%'; // Adjust the width as needed
+    card.style.boxSizing = 'border-box'; // Include padding and border in the width
+    card.style.borderRadius = '8px'; // Set border-radius for rounded corners
+    card.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)'; // Add box shadow for a subtle effect
+    card.style.transition = 'transform 0.3s'; // Add transition effect on hover
+    card.style.backgroundColor = '#ffff00'; // Set background color
+    card.style.overflow = 'hidden'; // Hide overflow content
+
+    const carImage = document.createElement('div');
+    carImage.className = 'card-image';
+
+    const imageElement = document.createElement('img');
+    imageElement.src = car.image[0].url; // Assuming the first image URL is the main image
+    imageElement.alt = `${car.make} ${car.model}`;
+    imageElement.style.width = '100%'; // Use 100% width to fill the card width
+    imageElement.style.height = '100%'; // Use 100% height to fill the card height
+    imageElement.style.objectFit = 'cover'; // Maintain aspect ratio and cover the entire container
+
+    carImage.appendChild(imageElement);
+
+    const carDetails = document.createElement('div');
+    carDetails.className = 'card-details';
+    carDetails.style.display = 'flex';
+    carDetails.style.flexDirection = 'column';
+    carDetails.style.alignItems = 'center';
+    carDetails.style.justifyContent = 'center';
+    carDetails.style.height = '40%';
+    carDetails.style.padding = '10px';
+
+    const makeModel = document.createElement('h2');
+    makeModel.textContent = `${car.make} ${car.model}`;
+
+    const price = document.createElement('p');
+    price.textContent = `Price: ${car.price}`;
+
+    const viewMoreButton = document.createElement('button');
+    viewMoreButton.textContent = 'View More';
+    viewMoreButton.className = 'view-button';
+
+    // Add click event listener to the card wrapper
+    cardWrapper.addEventListener('click', () => handleViewMore(car._id));
+
+    carDetails.appendChild(makeModel);
+    carDetails.appendChild(price);
+    carDetails.appendChild(viewMoreButton);
+
+    card.appendChild(carImage);
+    card.appendChild(carDetails);
+
+    cardWrapper.appendChild(card);
+
+    return cardWrapper;
+}
+
+    
+    
+    
+    // Example of a custom function to handle "View More" button click
+    function handleViewMore(carId) {
+        // Navigate to the URL using the car ID
+        window.location.href = `http://localhost:3001/cars/${carId}`;
+    }
+    function populateDropdownOptions(cars) {
+        const makesDropdown = document.getElementById('filterMakes');
+        const modelsDropdown = document.getElementById('filterModels');
+        // const pricesDropdown = document.getElementById('filterPrice');
+
+        // Extract unique makes, models, and price ranges from the car data
+        const uniqueMakes = [...new Set(cars.map(car => car.make))];
+        const uniqueModels = [...new Set(cars.map(car => car.model))];
+        const uniquePriceRanges = [
+            ...new Set(cars.map(car => car.price)),
+            'Not specified', // You can customize this as needed
+        ];
+
+        // Populate makes dropdown
+        populateDropdownOptionsHelper(makesDropdown, uniqueMakes);
+
+        // Populate models dropdown
+        populateDropdownOptionsHelper(modelsDropdown, uniqueModels);
+
+        // Populate prices dropdown
+        // populateDropdownOptionsHelper(pricesDropdown, uniquePriceRanges);
+    }
+
+    function populateDropdownOptionsHelper(dropdown, options) {
+        // Clear existing options
+        dropdown.innerHTML = '';
+
+        // Add default "All" option
+        const allOption = document.createElement('option');
+        allOption.value = 'all';
+        allOption.textContent = 'All';
+        dropdown.appendChild(allOption);
+
+        // Add options based on the provided array
+        options.forEach(option => {
+            const dropdownOption = document.createElement('option');
+            dropdownOption.value = option;
+            dropdownOption.textContent = option;
+            dropdown.appendChild(dropdownOption);
+        });
+    }
+
+    // Fetch car data from the server
+    fetch('/api/cars')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch car data');
+            }
+            return response.json();
+        })
+        .then(cars => {
+            // Initial rendering
+            updateImageGallery(cars);
+
+            // Populate dropdown options based on fetched data
+            populateDropdownOptions(cars);
+        })
+        .catch(error => {
+            console.error('Error fetching car data:', error);
+        });
+
+    function performSearch() {
+        console.log('Performing search...');
+        const selectedMake = document.getElementById('filterMakes').value;
+        const selectedModel = document.getElementById('filterModels').value;
+        
+
+        fetch('/api/cars')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch car data');
+                }
+                return response.json();
+            })
+            .then(cars => {
+                const filteredCars = cars.filter(car => {
+                    const makeMatch = selectedMake === 'all' || car.make.toLowerCase() === selectedMake.toLowerCase();
+                    const modelMatch = selectedModel === 'all' || car.model.toLowerCase() === selectedModel.toLowerCase();
+
+                    return makeMatch && modelMatch;
+                });
+
+                // Update the image gallery with filtered cars
+                updateImageGallery(filteredCars);
+            })
+            .catch(error => {
+                console.error('Error fetching car data:', error);
+            });
+    }
+
+    // Attach the event listener after defining the function
+    document.getElementById('searchButton').addEventListener('click', performSearch);
+});
+
+</script>
 </body>
 </html>
