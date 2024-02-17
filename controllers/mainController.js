@@ -484,6 +484,12 @@ router.get('/success', (req, res) => {
   
 });
 
+router.get('/address', (req, res) => {
+    // You can replace the example address with your actual address
+    
+    
+    res.render('address');
+});
 
 router.get('/logout', (req, res) => {
     req.logout((err) => {

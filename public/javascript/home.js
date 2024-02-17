@@ -173,3 +173,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Attach the event listener after defining the function
     document.getElementById('searchButton').addEventListener('click', performSearch);
 });
+
+
+document.body.style.overflowX = "hidden";

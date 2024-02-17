@@ -102,7 +102,7 @@ input {
 .form-btn {
     padding: 12px;
     background-color: #485dff;
-    color: white;
+    color: rgb(0, 0, 0);
     border: none;
     cursor: pointer;
 }
@@ -131,6 +131,7 @@ input {
 
         #contact-topinfo p {
             margin: 3px 0;
+            
         }
 
 
@@ -150,7 +151,7 @@ input {
 nav {
     margin-top: -1rem;
     display: flex;
-    justify-content: center;
+    justify-content:flex-end;
     align-items: center;
 }
 
@@ -380,157 +381,134 @@ background-color: #45a049;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+#contact-topinfo {
+    position: relative;
+}
 
-/* Responsive styles for smaller screens */
-@media only screen and (max-width: 600px) {
+#logo {
+    position: absolute;
+    top: -6rem;
+    left: 2rem;
+    height: 300vh;
+    max-height: 350px; /* Set a maximum height to prevent excessive growth */
+    width: auto; /* Allow the width to adjust proportionally */
+    margin-right: 10px;
+}
 
- 
+#contact-topinfo h1 {
+    margin: 3px 0 3px 80px; /* Add margin to the heading to make space for the logo */
+    font-size: 20px;
+}
 
 
-    body {
-        margin: 10px;
+@media only screen and (max-width: 768px) {
+            body {
+                margin: 10px;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            ul {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-left: 2rem;
+            }
+
+            li {
+                margin: 5px 0;
+            }
+
+            #calculatorModal {
+                max-width: 100%;
+            }
+
+            input {
+                width: 100%;
+            }
+
+            #searchContainer {
+                margin-top: 4rem;
+            }
+
+            #contact-topinfo {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            #contact-topinfo p {
+                margin: 5px 0;
+                margin-right: 3rem;
+            }
+
+            #calculatorModal {
+                max-width: 60%;
+                position: relative;
+                bottom: -10rem;
+                z-index: 999;
+                background-color: #45a049;
+            }
+
+            #financeForm {
+                max-height: none;
+                background-color: #45a049;
+            }
+
+            label {
+                text-align: center;
+            }
+
+            input {
+                width: 80%;
+                margin: 10px 0;
+            }
+
+            .form-btn {
+                width: 80%;
+            }
+
+            #result {
+                margin-top: 1px;
+            }
+
+            #imageGallery,
+            .carCard {
+                width: 100%;
+            }
+
+            #imageGallery img {
+                width: 100%;
+            }
+
+            .carCard {
+                width: 100%;
+            }
+
+        
+            #logo {
+        top: -3rem;
+        left: 1rem;
+        height: 120vh;
+        max-height: 160px;
+        margin-right: 5px;
     }
 
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
+    #contact-topinfo h1 {
+        margin: 3px 0 3px 60px;
+        font-size: 16px;
     }
 
-    ul {
-        flex-direction: column;
-        align-items: flex-start;
-        margin-left: 2rem;
-    }
-
-    li {
-        margin: 5px 0;
-    }
-
-    #calculatorModal {
-        max-width: 100%;
-    }
-
-    input {
-        width: 100%;
-    }
-
-    #searchContainer {
-        margin-top: 4rem;
-    }
-
-       #contact-topinfo {
-flex-direction: column;
-align-items: flex-start;
-}
-
-#contact-topinfo p {
-margin: 5px 0; /* Adjust margin for paragraphs in column layout */
-}
-
-
-
-#calculatorModal {
-max-width: 60%;
-position: relative;
-bottom:-10rem;
-z-index: 999;
-background-color: #45a049;
-
-}
-
-#financeForm {
-max-height: none; /* Reset max-height for small screens */
-background-color: #45a049;
-}
-
-label {
-text-align: center; /* Center align labels */
-}
-
-input {
-width: 80%;
-margin: 10px 0; /* Adjust margin for better spacing */
-}
-
-.form-btn {
-width: 80%;
-}
-
-#result {
-margin-top: 1px;
-}
-
-#imageGallery {
-    flex-direction: column; /* Change to a column layout on smaller screens */
-    width: 100%;
-}
-#imageGallery {
-    flex-direction: column; /* Change to a column layout on smaller screens */
-}
-
-#imageGallery img {
-    width: 100%; /* Set the width to 100% for small screens */
-}
-
-#imageGallery {
+    #contact-topinfo {
     flex-direction: column;
-    width: 70%;
-    margin: auto;
-    margin-top: 15rem
+    align-items: flex-start;
+    align-items: flex-end;
 }
+      
 
-.carCard {
-    cursor: pointer;
-    border: 1px solid #ccc;
-    /* border-radius: 10px; */
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    width: calc(100% - 20px);
-    margin: 0;
-    background-color: #ffffff;
-}
-}
- 
- #logo{
-   height: 49vh;
-   position: absolute;
-   top:-10px;
-   left: 5rem;
- }
 
- .popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  z-index: 1000;
-}
 
-.popup-content {
-  text-align: center;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
 }
 
 
@@ -540,9 +518,10 @@ margin-top: 1px;
 
 <body>
     <div id="contact-topinfo">
-        <h1 style="color: #dceb17; font-size: 8vh;">ABDULLAH'S CAR SALES </h1>
-        <p> <i class="fas fa-phone"></i> +27 72 657 6102 &nbsp;&nbsp; </p>
-        <p> <i class="fas fa-envelope"></i> &nbsp;&nbsp;&nbsp;acauto86@gmail.com</p>
+        <a href="/"><img id="logo"   src="images/logo2.png" alt="Abdullah's Car Sales Logo"></a>
+        <!-- <h1 style="color: #dceb17; font-size: 5vh;">ABDULLAH'S CAR SALES </h1> -->
+        <p> <i class="fas fa-phone"></i> +27 72 657 6102 </p>
+        <p> <i class="fas fa-envelope"></i> acauto86@gmail.com</p>
     </div>
     <video id="video-background" autoplay muted loop>
         <!-- Add your video source here -->
@@ -558,9 +537,9 @@ margin-top: 1px;
             <ul>
                 <li><a href="/">Home</a></li>
                 <li class="blacklisted"><a href="/blacklisted">BLACKLISTED</a></li>
-                <li><a href="/cars">Car list</a></li>
+               
                 <li><a href="/aboutus">About us </a></li>
-         <li> <a href="https://wa.me/+27726576102/?text=Hi%2C%20I%20want%20to%20apply%20for%20the%20finance%20application" id="applyNowLink" target="_blank">Apply Now</a></li>
+         <li> <a href="https://wa.me/+27726576102/?text=Hi%2C%20I%20want%20to%20apply%20for%20the%20finance%20application" id="applyNowLink" id="applyNowLink" target="_blank">Apply Now</a></li>
 
                 <li><a onclick="openCalculator()">Financial Calculator</a></li>
                 <% if(!currentUser) { %>
@@ -569,6 +548,7 @@ margin-top: 1px;
                 <% } else { %>
                 <a href="/logout">Logout</a>
                 <% } %>
+                <li><a href="/address"><i class="fa-solid fa-location-pin"></i>Our address </a></li>
             </ul>
         </nav>
         <hr>
