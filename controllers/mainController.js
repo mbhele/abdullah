@@ -338,24 +338,90 @@ router.get('/viewtheblacklist', async (req, res) => {
   });
 
 
-  // Display the finance application form
-router.get('/finance-application', (req, res) => {
-    res.render('financeApplicationForm');
-  });
-  
-  // Handle the form submission
-  router.post('/finance-application', async (req, res) => {
+  // Display the finance information page
+router.get('/finance', (req, res) => {
+    res.render('finance'); // assuming your view file is named finance.ejs
+
+});
+
+router.post('/finance', upload.fields([
+    { name: 'payslips', maxCount: 1 },
+    { name: 'copy_of_id', maxCount: 1 },
+    { name: 'proof_of_address', maxCount: 1 },
+    { name: 'license', maxCount: 1 },
+    { name: 'bank_statement', maxCount: 1 },
+    { name: 'spouse_documents', maxCount: 1 }
+]), async (req, res) => {
     try {
-      // Create a new car finance application
-      const carFinance = new CarFinance(req.body);
-      // Save the application to the database
-      await carFinance.save();
-      res.redirect('/thank-you'); // Redirect to a thank-you page or next step
+        // Access form data from req.body
+        const formData = req.body;
+        console.log('Form Data:', formData);
+
+        // Access file uploads from req.files
+        const files = req.files;
+        console.log('Uploaded Files:', files);
+
+        // Your logic to handle the form data and files goes here
+        // You can save the data to your database or perform any additional processing
+
+        // Create a formatted HTML email body
+        const emailBody = `
+            <h2>New Finance Application Form Submitted</h2>
+            
+            <h3>Form Data:</h3>
+            <pre>${JSON.stringify(formData, null, 2)}</pre>
+
+            <h3>Uploaded Files:</h3>
+            <ul>
+                ${Object.entries(files).map(([fieldName, fileArray]) => {
+                    return `
+                        <li>
+                            <strong>${fieldName}:</strong>
+                            ${fileArray.map(file => {
+                                return `
+                                    <div>
+                                        <p>Original Name: ${file.originalname}</p>
+                                        <p>Mimetype: ${file.mimetype}</p>
+                                        <p>Size: ${file.size} bytes</p>
+                                        <a href="${file.path}" target="_blank">View/Download PDF</a>
+                                    </div>`;
+                            }).join('')}
+                        </li>`;
+                }).join('')}
+            </ul>
+
+            <p>Thank you!</p>
+        `;
+
+        // Send email notification
+        const mailOptions = {
+            from: '1mbusombhele@gmail.com',
+            to: 'mbusiseni.mbhele@gmail.com',
+            subject: 'New Finance Application',
+            html: emailBody,
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error('Error sending email:', error);
+            } else {
+                console.log('Email sent:', info.response);
+            }
+        });
+
+        // Respond to the client as needed
+        res.send('Form submitted successfully!');   
+
     } catch (error) {
-      console.error(error);
-      res.render('error'); // Handle errors appropriately
+        console.error(error);
+        res.status(500).send('Internal Server Error');
     }
-  });
+});
+
+
+
+  // Display the finance application form
+
   
 // Modify your server route handling /api/cars
 router.get('/api/cars', async (req, res) => {

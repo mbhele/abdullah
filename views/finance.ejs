@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Disclosure and Acknowledgement Consent</title>
+    <style>
+ body {
+            background-color: #000000;
+            zoom: 90%;
+            font-family: Arial, sans-serif;
+            color: #000000;
+            text-align: center;
+            padding: 20px;
+            height: 150vh;
+        
+        }
+
+    
+
+        h1 {
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .card-heading {
+            font-size: 1.2em;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            padding: 20px;
+            margin-top: 5rem;
+            box-sizing: border-box;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+
+        @media (max-width: 768px) {
+
+body{
+    height: 250vh;
+}
+
+#logo {
+    top: -4rem !important;
+    left: -2rem !important;
+    height: 116vh;
+    max-height: 160px;
+    margin-right: 5px;
+}
+
+
+
+    #contact-topinfo p {
+    margin: 5px 0 !important;
+    margin-right: 0rem !important;
+}
+.footer {
+    background-color: #ffff00;
+    color: rgb(0, 0, 0) !important;
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    left: -0.7rem;
+}
+
+        }
+    </style>
+</head>
+
+<body>
+    <%- include ('./partials/navigation.ejs') %>
+    <form action="/finance" method="post" enctype="multipart/form-data">
+        <h2>Vehicle Interest</h2>
+        <label for="vehicle_interest">Vehicle Interested In</label>
+        <input type="text" name="vehicle_interest" id="vehicle_interest">
+        <br>
+
+        <label for="blacklisted">Are you blacklisted?</label>
+        <label>
+            <input class="yes" type="radio" name="blacklisted" value="yes"> Yes
+        </label>
+        <label>
+            <input class="yes" type="radio" name="blacklisted" value="no"> No
+        </label>
+        <br>
+
+        <label for="trade_in">Do you have a trade-in?</label>
+        <label>
+            <input class="yes" type="radio" name="trade_in" value="yes"> Yes
+        </label>
+        <label>
+            <input  class="yes" type="radio" name="trade_in" value="no"> No
+        </label>
+        <br>
+
+        <label for="deposit_amount">Deposit Amount (Optional)</label>
+        <input type="text" name="deposit_amount" id="deposit_amount">
+        <br>
+
+        <label for="hear_about_us">Where did you hear about us?</label>
+        <input type="text" name="hear_about_us" id="hear_about_us">
+        <br>
+
+        <h2>Personal Details</h2>
+        <label for="full_name">Full Name</label>
+        <input type="text" name="full_name" id="full_name">
+        <br>
+
+        <label for="id_full_name">Full Name as Written on ID</label>
+        <input type="text" name="id_full_name" id="id_full_name">
+        <br>
+
+        <label for="id_number">ID Number</label>
+        <input type="text" name="id_number" id="id_number">
+        <br>
+
+        <label for="gender">Gender</label>
+        <select name="gender" id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <br>
+
+        <label for="graduate">Graduate</label>
+        <label>
+            <input class="yes" type="radio" name="graduate" value="yes"> Yes
+        </label>
+        <label>
+            <input  class="yes" type="radio" name="graduate" value="no"> No
+        </label>
+        <br>
+
+        <label for="income_tax_number">Income Tax Number</label>
+        <input type="text" name="income_tax_number" id="income_tax_number">
+        <br>
+
+        <label for="telephone_number_home">Telephone Number (Home)</label>
+        <input type="text" name="telephone_number_home" id="telephone_number_home">
+        <br>
+
+        <label for="cellphone_number">Cellphone Number</label>
+        <input type="text" name="cellphone_number" id="cellphone_number">
+        <br>
+
+        <label for="email_address">Email Address</label>
+        <input type="email" name="email_address" id="email_address">
+        <br>
+
+        <label for="address">Address</label>
+        <input type="text" name="address" id="address">
+        <br>
+
+        <label for="length_at_address">How long have you lived at the above address? (Mention years and months if applicable)</label>
+        <input type="text" name="length_at_address" id="length_at_address">
+        <br>
+
+        <label for="drivers_license">Do you have a driver's license?</label>
+        <label>
+            <input class="yes" type="radio" name="drivers_license" value="yes"> Yes
+        </label>
+        <label>
+            <input class="yes" type="radio" name="drivers_license" value="no"> No
+        </label>
+        <br>
+
+        <label for="parents_drivers_license">Does your Mother or Father have a driver's license?</label>
+        <label>
+            <input class="yes" type="radio" name="parents_drivers_license" value="yes"> Yes
+        </label>
+        <label>
+            <input class="yes" type="radio" name="parents_drivers_license" value="no"> No
+        </label>
+        <br>
+        <h2>Employment Details</h2>
+        <label for="company_name">Company Name</label>
+        <input type="text" name="company_name" id="company_name">
+        <br>
+
+        <label for="date_started">Date Started at this Company</label>
+        <input type="date" name="date_started" id="date_started">
+        <br>
+
+        <label for="job_title">Job Title</label>
+        <input type="text" name="job_title" id="job_title">
+        <br>
+
+        <label for="pay_date">Pay Date</label>
+        <input type="text" name="pay_date" id="pay_date">
+        <br>
+
+        <label for="company_telephone">Telephone Number</label>
+        <input type="text" name="company_telephone" id="company_telephone">
+        <br>
+
+        <label for="supervisor">Supervisor</label>
+        <input type="text" name="supervisor" id="supervisor">
+        <br>
+
+        <label for="company_address">Company Street Address</label>
+        <input type="text" name="company_address" id="company_address">
+        <br>
+        <h2>Home Ownership</h2>
+        <label for="own_property">Do you own property?</label>
+        <label>
+            <input class="yes" type="radio" name="own_property" value="yes"> Yes
+        </label>
+        <label>
+            <input class="yes" type="radio" name="own_property" value="no"> No
+        </label>
+        <br>
+
+        <label for="property_owner">In whose name is the property?</label>
+        <select name="property_owner" id="property_owner">
+            <option value="own">Own</option>
+            <!-- Add more options as needed -->
+        </select>
+        <br>
+
+        <label for="bond_rental_payment">Bond/Rental payment per month</label>
+        <input type="text" name="bond_rental_payment" id="bond_rental_payment">
+        <br>
+
+        <label for="current_house_value">Current value of house</label>
+        <input type="text" name="current_house_value" id="current_house_value">
+        <br>
+
+        <label for="bonded_bank">Bonded via which bank?</label>
+        <input type="text" name="bonded_bank" id="bonded_bank">
+        <br>
+
+        <h2>Marital Status</h2>
+        <label for="marital_status">Marital Status</label>
+        <select name="marital_status" id="marital_status">
+            <option value="single">Single</option>
+            <option value="married">Married</option>
+            <option value="single">Single</option>
+            <option value="other">Other</option>
+            <!-- Add more options as needed -->
+        </select>
+        <br>
+
+        <label for="date_married">Date Married</label>
+        <input type="date" name="date_married" id="date_married">
+        <br>
+
+        <label for="marriage_contract">Marriage contract</label>
+        <select name="marriage_contract" id="marriage_contract">
+            <option value="anc">ANC - Out of community of property</option>
+            <option value="cop">COP - Community in property</option>
+            <option value="other">Other</option>
+            <!-- Add more options as needed -->
+        </select>
+        <br>
+        <h2>Personal Bank Details</h2>
+
+        <label for="bank_name">Bank Name</label>
+        <input type="text" name="bank_name" id="bank_name">
+        <br>
+
+        <label for="account_type">Account Type</label>
+        <select name="account_type" id="account_type">
+            <option value="cheque">Cheque</option>
+            <option value="cheque">Savings</option>
+            <option value="cheque">Current</option>
+            <option value="cheque">Transimission</option>
+
+            <!-- Add other account types as needed -->
+        </select>
+        <br>
+
+        <label for="branch_name_code">Branch Name/Code</label>
+        <input type="text" name="branch_name_code" id="branch_name_code">
+        <br>
+
+        <label for="account_number">Account Number</label>
+        <input type="text" name="account_number" id="account_number">
+        <br>
+
+        <h2>Vehicle Finance</h2>
+
+        <label for="previous_vehicle_finance">Previous Vehicle Finance</label>
+        <label>
+            <input class="yes" type="radio" name="previous_vehicle_finance" value="yes"> Yes
+        </label>
+        <label>
+            <input class="yes" type="radio" name="previous_vehicle_finance" value="no"> No
+        </label>
+        <br>
+
+        <label for="existing_vehicle_finance">Existing Vehicle Finance</label>
+        <label>
+            <input class="yes" type="radio" name="existing_vehicle_finance" value="yes"> Yes
+        </label>
+        <label>
+            <input class="yes" type="radio" name="existing_vehicle_finance" value="no"> No
+        </label>
+        <br>
+
+        <label for="existing_bank_name">Bank Name</label>
+        <input type="text" name="existing_bank_name" id="existing_bank_name">
+        <br>
+
+        <label for="existing_account_number">Account Number</label>
+        <input type="text" name="existing_account_number" id="existing_account_number">
+        <br>
+
+        <label for="vehicle_description">Which Vehicle</label>
+        <input type="text" name="vehicle_description" id="vehicle_description">
+        <br>
+
+        <label for="installment_per_month">Installment per month</label>
+        <input type="text" name="installment_per_month" id="installment_per_month">
+        <br>
+
+        <label for="trade_vehicle">Are you going to trade the vehicle in?</label>
+        <label>
+            <input class="yes" type="radio" name="trade_vehicle" value="yes"> Yes
+        </label>
+        <label>
+            <input class="yes" type="radio" name="trade_vehicle" value="no"> No
+        </label>
+        <br>
+
+        <label for="income">Income</label>
+        <input type="text" name="income" id="income">
+        <br>
+
+        <label for="gross_salary">Gross Salary</label>
+        <input type="text" name="gross_salary" id="gross_salary">
+        <br>
+
+        <label for="net_salary">Net Salary</label>
+        <input type="text" name="net_salary" id="net_salary">
+        <br>
+
+        <label for="other_income">Other income per month</label>
+        <input type="text" name="other_income" id="other_income">
+        <br>
+
+        <label for="source_of_other_income">Source of other income</label>
+        <input type="text" name="source_of_other_income" id="source_of_other_income">
+        <br>
+
+        <label for="personal_expenses">Personal Expenses per month</label>
+        <input type="text" name="personal_expenses" id="personal_expenses">
+        <br>
+
+        <label for="spouses_expenses">Enter your expenses into the first box and if married your spouses' expenses into
+            the second box.</label>
+        <input type="text" name="spouses_expenses" id="spouses_expenses">
+        <br>
+
+        <label for="bond_payment_rent">Bond Payment / Rent</label>
+        <input type="text" name="bond_payment_rent" id="bond_payment_rent">
+        <br>
+
+        <label for="rates_water_lights">Rates, Water, Lights</label>
+        <input type="text" name="rates_water_lights" id="rates_water_lights">
+        <br>
+
+        <label for="vehicle_instalments">Vehicle Instalments (Excluding vehicles that you are trading in)</label>
+        <input type="text" name="vehicle_instalments" id="vehicle_instalments">
+        <br>
+
+        <label for="personal_loan_repayments">Personal Loan Repayments</label>
+        <input type="text" name="personal_loan_repayments" id="personal_loan_repayments">
+        <br>
+
+        <label for="credit_card_repayments">Credit Card Repayments</label>
+        <input type="text" name="credit_card_repayments" id="credit_card_repayments">
+        <br>
+
+        <label for="furniture_accounts">Furniture Accounts</label>
+        <input type="text" name="furniture_accounts" id="furniture_accounts">
+        <br>
+
+        <label for="clothing_accounts">Clothing Accounts</label>
+        <input type="text" name="clothing_accounts" id="clothing_accounts">
+        <br>
+
+        <label for="overdraft_repayments">Overdraft Repayments</label>
+        <input type="text" name="overdraft_repayments" id="overdraft_repayments">
+        <br>
+
+        <label for="policy_insurance_repayments">Policy / Insurance Repayments</label>
+        <input type="text" name="policy_insurance_repayments" id="policy_insurance_repayments">
+        <br>
+
+        <label for="telephone_cellphone_payment">Telephone or Cellphone Payment</label>
+        <input type="text" name="telephone_cellphone_payment" id="telephone_cellphone_payment">
+        <br>
+
+        <label for="transport_travel_costs">Transport / Travel Costs</label>
+        <input type="text" name="transport_travel_costs" id="transport_travel_costs">
+        <br>
+
+        <label for="education_costs">Education Costs (School Fees etc.)</label>
+        <input type="text" name="education_costs" id="education_costs">
+        <br>
+
+        <label for="child_maintenance">Child Maintenance</label>
+        <input type="text" name="child_maintenance" id="child_maintenance">
+        <br>
+
+        <label for="household_expenses">Household Expenses other than food</label>
+        <input type="text" name="household_expenses" id="household_expenses">
+        <br>
+
+        <label for="other_expenses">Other</label>
+        <input type="text" name="other_expenses" id="other_expenses">
+        <br>
+
+
+        <label for="payslips">3 Months Payslips</label>
+        <input type="file" name="payslips" id="payslips" accept=".pdf, .jpg, .jpeg, .png">
+        <br>
+
+        <label for="copy_of_id">Copy of ID</label>
+        <input type="file" name="copy_of_id" id="copy_of_id" accept=".pdf, .jpg, .jpeg, .png">
+        <br>
+
+        <label for="proof_of_address">Proof of Address (Account or utility bill not older than three months)</label>
+        <input type="file" name="proof_of_address" id="proof_of_address" accept=".pdf, .jpg, .jpeg, .png">
+        <br>
+
+        <label for="license">License if available</label>
+        <input type="file" name="license" id="license" accept=".pdf, .jpg, .jpeg, .png">
+        <br>
+
+        <label for="bank_statement">Three months bank statement (Stamped)</label>
+        <input type="file" name="bank_statement" id="bank_statement" accept=".pdf, .jpg, .jpeg, .png">
+        <br>
+
+        <label for="spouse_documents">If married – spouse payslip and copy of ID (Include licence if available)</label>
+        <input type="file" name="spouse_documents" id="spouse_documents" accept=".pdf, .jpg, .jpeg, .png">
+        <br>
+
+
+        <h2>Privacy Disclosure and Acknowledgement Consent</h2>
+        
+        <p>
+            I understand and acknowledge that as part of the finance application process, the financial institution/s with
+            whom my application has been shared, may approach my primary bank to obtain additional information on my
+            profile, in order to assist to process my application, which includes, but is not limited to information that
+            may be required for behavioural analysis to provide product suggestions, FICA, fraud, income and affordability
+            verification purposes.
+        </p>
+        <label>
+            <input class="yes" type="radio" name="acknowledgement" value="yes"> Yes
+        </label>
+        <label>
+            <input class="yes" type="radio" name="acknowledgement" value="no"> No
+        </label>
+
+        <h2>Secure-X Bank Statements Consent (IDX)</h2>
+        <p>
+            Spouse (If Married and you want to do combined income)
+        </p>
+        <label>
+            <input  class="yes" type="radio" name="bank_statements_consent" value="yes"> Yes
+        </label>
+        <label>
+            <input class="yes" type="radio" name="bank_statements_consent" value="no"> No
+        </label>
+
+        <h2>Income Verification Consent (IVX)</h2>
+        <p>
+            Applicant
+        </p>
+        <label>
+            <input class="yes" type="radio" name="income_verification_applicant" value="yes"> Yes
+        </label>
+        <label>
+            <input class="yes" type="radio" name="income_verification_applicant" value="no"> No
+        </label>
+
+        <p>
+            Spouse (If Married and you want to do combined income)
+        </p>
+        <label>
+            <input  class="yes" type="radio" name="income_verification_spouse" value="yes"> Yes
+        </label>
+        <label>
+            <input class="yes" type="radio" name="income_verification_spouse" value="no"> No
+        </label>
+
+        <h2>Proof Of Residence Consent (FICA-X)</h2>
+        <p>
+            Applicant
+        </p>
+        <label>
+            <input class="yes" type="radio" name="residence_consent" value="yes"> Yes
+        </label>
+        <label>
+            <input class="yes" type="radio" name="residence_consent" value="no"> No
+        </label>
+
+        <h2>Privacy Policy</h2>
+        <p>
+            By sending this enquiry, you agree to be contacted by Affinity Cars and have your personal information processed
+            for the purpose of this enquiry, and in doing so agree to our Privacy Policy.
+        </p>
+        <label>
+            <input type="checkbox" name="privacy_policy_agreement" required> I agree to the Privacy Policy
+        </label>
+
+        <br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+
+</html>

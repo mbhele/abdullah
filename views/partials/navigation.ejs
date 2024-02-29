@@ -15,6 +15,7 @@
     font-family: Arial, sans-serif;
     margin: 20px;
     overflow-x: hidden;
+ 
 
 }
 
@@ -153,6 +154,7 @@ nav {
     display: flex;
     justify-content:flex-end;
     align-items: center;
+    /* zoom:20%; */
 }
 
 ul {
@@ -517,6 +519,7 @@ background-color: #45a049;
 </head>
 
 <body>
+    
     <div id="contact-topinfo">
         <a href="/"><img id="logo"   src="images/logo2.png" alt="Abdullah's Car Sales Logo"></a>
         <!-- <h1 style="color: #dceb17; font-size: 5vh;">ABDULLAH'S CAR SALES </h1> -->
@@ -539,16 +542,19 @@ background-color: #45a049;
                 <li class="blacklisted"><a href="/blacklisted">BLACKLISTED</a></li>
                
                 <li><a href="/aboutus">About us </a></li>
-         <li> <a href="https://wa.me/+27726576102/?text=Hi%2C%20I%20want%20to%20apply%20for%20the%20finance%20application" id="applyNowLink" id="applyNowLink" target="_blank">Apply Now</a></li>
+         <li> <a href="/finance" id="applyNowLink" target="_blank">Apply Now</a></li>
 
                 <li><a onclick="openCalculator()">Financial Calculator</a></li>
+                <li><a href="/address"><i class="fa-solid fa-location-pin"></i>Our address </a></li>
                 <% if(!currentUser) { %>
+              <div  style="display: none;">    
                 <a href="/login">Log in</a>
                 <a href="/register">Sign up</a>
                 <% } else { %>
                 <a href="/logout">Logout</a>
                 <% } %>
-                <li><a href="/address"><i class="fa-solid fa-location-pin"></i>Our address </a></li>
+            </div>  
+                
             </ul>
         </nav>
         <hr>

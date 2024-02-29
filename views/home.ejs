@@ -11,7 +11,7 @@
  
     
 body {
-  zoom: 80%;
+  zoom: 85%;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
@@ -182,9 +182,9 @@ body {
                     <img src="<%= car.image && car.image.length ? car.image[car.image.length - 1].url : '/default-image.jpg' %>" alt="<%= car.name %>'s Image">
                 </div>
                 <div class="card-details">
-                    <h2><%= car.name %></h2>
-                    <p>Car: <%= car.subject %></p>
-                    <p>Price: R<%= car.price || 400 %></p>
+                    <h2 style="text-align: center;"><%= car.name %></h2>
+                    <p style="text-align: center;"><%= car.subject %></p>
+                    <p style="text-align: center;">Price: R<%= car.price || 400 %></p>
                     <a href="/cars/<%= car._id %>">Details</a>
                 </div>
             </div>
