@@ -11,7 +11,7 @@
       background-color: #000000;
       margin: 0;
       padding: 0;
-      zoom: 90%;
+      zoom: 85%;
       position: relative;
     }
 
@@ -51,7 +51,7 @@
 
     button {
       background-color: #4caf50;
-      color: #fff;
+      color: #000000;
       padding: 10px 15px;
       border: none;
       border-radius: 4px;
@@ -65,16 +65,19 @@
 
     p {
       margin-top: 15px;
-      color: #333;
+      color: #ffffff;
     }
 
     a {
-      color: #4caf50 ;
+      color: #000000 ;
       text-decoration: none;
     }
 
     a:hover {
       text-decoration: underline;
+    }
+    #accountP{
+      color: #000000;
     }
   </style>
   <title>Login</title>
@@ -94,7 +97,7 @@
       <button type="submit">Login</button>
     </form>
 
-    <p>Don't have an account? <a href="/register">Register here</a>.</p>
+    <p id="accountP">Don't have an account? <a href="/register" style="color: #000000;text-decoration: underline;">Register here</a>.</p>
   </div>
 
   <%- include ('../partials/footer.ejs') %>

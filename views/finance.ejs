@@ -6,107 +6,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Disclosure and Acknowledgement Consent</title>
     <style>
- body {
-            background-color: #000000;
-            zoom: 90%;
-            font-family: Arial, sans-serif;
-            color: #000000;
-            text-align: center;
-            padding: 20px;
-            height: 150vh;
-        
-        }
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000000;
+    zoom: 85%;
+}
 
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    
+}
+
+.radio-label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.checkbox-label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+.file-label {
+    display: block;
+    margin-top: 10px;
+}
+
+.checkbox-agreement {
+    display: inline-block;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+@media screen and (max-width: 425px) {
+ 
     
 
-        h1 {
-            margin-bottom: 20px;
-            color: #000000;
-        }
 
-        .card-heading {
-            font-size: 1.2em;
-            color: #000000;
-            margin-bottom: 10px;
-        }
-
-        form {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            width: 100%;
-            padding: 20px;
-            margin-top: 5rem;
-            box-sizing: border-box;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-bottom: 8px;
-        }
-
-        input {
-            padding: 10px;
-            margin-bottom: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #fff;
-            color: #333;
-        }
-
-        button {
-            padding: 12px;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-
-        @media (max-width: 768px) {
-
-body{
-    height: 250vh;
 }
-
-#logo {
-    top: -4rem !important;
-    left: -2rem !important;
-    height: 116vh;
-    max-height: 160px;
-    margin-right: 5px;
-}
+ 
 
 
-
-    #contact-topinfo p {
-    margin: 5px 0 !important;
-    margin-right: 0rem !important;
-}
-.footer {
-    background-color: #ffff00;
-    color: rgb(0, 0, 0) !important;
-    text-align: center;
-    padding: 5px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    left: -0.7rem;
-}
-
-        }
     </style>
 </head>
 
@@ -255,6 +236,8 @@ body{
         <label for="property_owner">In whose name is the property?</label>
         <select name="property_owner" id="property_owner">
             <option value="own">Own</option>
+            <option value="own">Spouse</option>
+            <option value="own">Both</option>
             <!-- Add more options as needed -->
         </select>
         <br>

@@ -27,6 +27,19 @@ const getCurrentUser = (req) => {
     }
 };
 
+
+const isAdmin = (req, res, next) => {
+    const currentUser = getCurrentUser(req);
+  
+    if (currentUser && currentUser.role === 'admin') {
+      // User is an admin, proceed to the next middleware or route handler
+      next();
+    } else {
+      // User is not an admin, redirect to a designated page
+      res.redirect('/not-authorized'); // You can customize the redirect URL
+    }
+  };
+  
 router.get('/test-current-user', (req, res) => {
     const currentUser = getCurrentUser(req);
 
@@ -142,7 +155,7 @@ router.get('/cars', async (req, res) => {
     }
 });
 
-router.get('/cars/create', ensureAuthenticated, (req, res) => {
+router.get('/cars/create', ensureAuthenticated,(req, res) => {
     if (!req.isAuthenticated()) {
         req.flash('error', 'You must be signed in');
         return res.redirect('/login');
@@ -150,7 +163,7 @@ router.get('/cars/create', ensureAuthenticated, (req, res) => {
     res.render('cars/create');
 });
 
-router.post('/cars/create', upload.array('carImage'), async (req, res) => {
+router.post('/cars/create', upload.array('carImage'),ensureAuthenticated, async (req, res) => {
     try {
         const carName = req.body.name;
         const carSubject = req.body.subject;
@@ -220,7 +233,7 @@ router.get('/cars/:id/edit', ensureAuthenticated, async (req, res) => {
     }
 });
 
-router.post('/cars/:id/edit', multer({ storage }).array('carImage'), async (req, res) => {
+router.post('/cars/:id/edit', multer({ storage }).array('carImage'), ensureAuthenticated, async (req, res) => {
     try {
         const car = await Car.findById(req.params.id);
         const carName = req.body.name;
@@ -252,7 +265,7 @@ router.post('/cars/:id/edit', multer({ storage }).array('carImage'), async (req,
     }
 });
 
-router.post('/cars/:id', async (req, res) => {
+router.post('/cars/:id', ensureAuthenticated, async (req, res) => {
     try {
         const deletedCar = await Car.findByIdAndDelete(req.params.id);
         if (!deletedCar) {
@@ -556,6 +569,10 @@ router.get('/address', (req, res) => {
     
     res.render('address');
 });
+
+router.get('/not-authorized', (req, res) => {
+    res.send('not-authorized'); // You can customize the view/template for the not-authorized page
+  });
 
 router.get('/logout', (req, res) => {
     req.logout((err) => {
