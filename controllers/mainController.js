@@ -409,7 +409,7 @@ router.post('/finance', upload.fields([
         // Send email notification
         const mailOptions = {
             from: '1mbusombhele@gmail.com',
-            to: 'mbusiseni.mbhele@gmail.com',
+            to: 'acauto86@gmail.com',
             subject: 'New Finance Application',
             html: emailBody,
         };
