@@ -9,19 +9,27 @@
 
   <style>
 body {
-    background: b;
+  
     font-family: Arial, sans-serif;
     margin: 20px;
     background: black !important;
     color: white;
     height: 200vh;
     text-align: left;
+
 }
 
 img{
   height: 50vh;
 }
+.create-car-form{
+  z-index: 999;
+  margin-top: 5rem;
+}
 
+form{
+  z-index: 999;
+}
 
 
 @media only screen and (max-width: 768px){
@@ -35,9 +43,10 @@ label {
 <body>
   <%- include ('../partials/navigation.ejs') %>
 
-  <div class="create-car-form">
+  <div class="create-car-form" style="padding-top:5rem">
+
     <h1>Create Car</h1>
-    <form action="/cars/create" method="post" enctype="multipart/form-data">
+    <form action="/cars/create" method="post" enctype="multipart/form-data" ">
       
       <!-- Name input -->
       <label for="name">Name:</label>
