@@ -498,7 +498,7 @@ router.post('/cars/:id/send-message', async (req, res) => {
         const imageUrl = car.image[0].url;
         const mailOptions = {
             from: 'acauto86@gmail.com',
-            to: 'acauto86@gmail.com',
+            to: 'mbusiseni.mbhele@gmail.com',
             subject: 'I am interested in this car',
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #000; color: #fff; padding: 20px; border-radius: 8px; text-align: center;">
