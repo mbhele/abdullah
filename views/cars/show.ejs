@@ -135,11 +135,29 @@
                 margin-left: 2rem;
             }
         }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+        }
     </style>
 </head>
 
 <body>
     <%- include ('../partials/navigation.ejs') %>
+
+    <!-- Notification container -->
+    <div class="notification" id="notification">
+        Thank you for your message!
+    </div>
 
     <!-- Display other details -->
     <div class="button-container">
@@ -182,7 +200,7 @@
                 <a href="https://wa.me/27726576102" target="_blank">
                     <button type="button">WhatsApp the Dealer</button>
                 </a>
-                <form action="/cars/<%= car._id %>/send-message" method="post">
+                <form action="/cars/<%= car._id %>/send-message" method="post" id="contactForm">
                     <label for="name">Name *</label>
                     <input type="text" id="name" name="name" required>
 
@@ -228,6 +246,20 @@
 
             $('#nextButton').on('click', function () {
                 fotorama.show('>');
+            });
+
+            // Handle form submission and show notification
+            $('#contactForm').on('submit', function (e) {
+                e.preventDefault(); // Prevent default form submission
+
+                $.post($(this).attr('action'), $(this).serialize(), function (response) {
+                    // Show notification
+                    $('#notification').fadeIn().delay(3000).fadeOut();
+                    // Redirect to the same page to clear form data
+                    window.location.href = window.location.href;
+                }).fail(function () {
+                    alert('Something went wrong. Please try again later.');
+                });
             });
         });
     </script>
