@@ -527,7 +527,6 @@ router.post('/cars/:id/send-message', async (req, res) => {
     }
 });
 
-
 router.get('/aboutus', (req, res) => {
     res.render('aboutUs'); // assuming your view file is named aboutUs.ejs
 });
