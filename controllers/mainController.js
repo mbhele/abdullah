@@ -508,12 +508,7 @@ router.post('/cars/:id/send-message', async (req, res) => {
                     <h3 style="color: #25d366; margin-bottom: 20px;">I am interested in this car</h3>
                     <p style="margin-bottom: 15px;">Name: ${name}</p>
                     <p style="margin-bottom: 15px;">Email: ${email}</p>
-                    <p style="margin-bottom: 15px;">Mobile: 
-                        <a href="https://wa.me/${mobile}" style="color: #25d366; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 10px 15px; background-color: #fff; border-radius: 5px; margin-top: 5px;">
-                            <img src="images/social.svg" alt="WhatsApp Icon" style="width: 20px; height: 20px; margin-right: 5px;">
-                            Contact on WhatsApp
-                        </a>
-                    </p>
+                    <p style="margin-bottom: 15px;">Mobile: ${mobile}</p>
                     <p style="margin-bottom: 15px;">Area: ${area}</p>
                     <p style="margin-bottom: 15px;">Message: ${message}</p>
                     <img src="${imageUrl}" alt="${car.name}'s Image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
