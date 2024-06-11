@@ -475,10 +475,10 @@ router.post('/cars/:id/send-message', async (req, res) => {
         const { name, email, mobile, area, message } = req.body;
         const carId = req.params.id; // Extract car ID from params
 
-        // Validate input fields
+        // Validate input fields (customize based on your schema)
         if (!name || !email || !mobile || !area || !message) {
             req.flash('error', 'All fields are required'); // Flash an error message
-            return res.redirect(`/cars/${carId}`); // Redirect to the car details page
+            return res.redirect(`/cars/${carId}/show`); // Redirect to the car details page
         }
 
         // Fetch the car details to get the image URL
@@ -524,13 +524,14 @@ router.post('/cars/:id/send-message', async (req, res) => {
         await transporter.sendMail(mailOptions);
 
         req.flash('success', 'Message sent successfully');
-        res.redirect(`/cars/${carId}`);
+        res.redirect(`/cars/${carId}/show`);
     } catch (error) {
         console.error(error);
         req.flash('error', 'Something went wrong. Please try again later.');
-        res.redirect(`/cars/${req.params.id}`);
+        res.redirect(`/cars/${req.params.id}/show`);
     }
 });
+
 
 router.get('/aboutus', (req, res) => {
     res.render('aboutUs'); // assuming your view file is named aboutUs.ejs
