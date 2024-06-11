@@ -502,7 +502,7 @@ router.post('/cars/:id/send-message', async (req, res) => {
             subject: 'I am interested in this car',
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #000; color: #fff; padding: 20px; border-radius: 8px; text-align: center;">
-                    <img src="images/company-logo.svg" alt="Company Logo" style="max-width: 100px; margin-bottom: 15px;">
+                    <img src="https://abdullahscarsales.co.za/images/logo2.png" alt="Company Logo" style="max-width: 100px; margin-bottom: 15px;">
                     <h2 style="color: #25d366; margin-bottom: 10px;">Abdullah's Car Sales</h2>
                     <h3 style="color: #25d366; margin-bottom: 20px;">I am interested in this car</h3>
                     <p style="margin-bottom: 15px;">Name: ${name}</p>
