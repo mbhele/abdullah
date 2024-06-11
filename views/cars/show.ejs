@@ -10,10 +10,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <!-- Toastr CSS for notifications -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-    <!-- Toastr JS for notifications -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <style>
         body {
@@ -168,9 +164,15 @@
         <div class="centeri">
             <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true">
                 <% car.image.forEach(function(img, index) { %>
-                    <a href="<%= img.url %>">
-                        <img src="<%= img.url %>" alt="<%= name %>'s Image">
-                    </a>
+                    <% if (index === 0) { %>
+                        <a href="<%= img.url %>">
+                            <img src="<%= img.url %>" alt="<%= name %>'s Image">
+                        </a>
+                    <% } else { %>
+                        <a href="<%= img.url %>">
+                            <img src="<%= img.url %>" alt="<%= name %>'s Image">
+                        </a>
+                    <% } %>
                 <% }); %>
             </div>
 
@@ -215,6 +217,7 @@
     <%- include ('../partials/footer.ejs') %>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+
     <script>
         $(document).ready(function () {
             var fotorama = $('.fotorama').fotorama().data('fotorama');
@@ -226,33 +229,6 @@
             $('#nextButton').on('click', function () {
                 fotorama.show('>');
             });
-
-            // Toastr configuration
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            };
-
-            <% if (flashSuccess) { %>
-                toastr.success('<%= flashSuccess %>');
-            <% } %>
-
-            <% if (flashError) { %>
-                toastr.error('<%= flashError %>');
-            <% } %>
         });
     </script>
 </body>
