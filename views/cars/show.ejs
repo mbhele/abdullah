@@ -182,38 +182,35 @@
                 <a href="https://wa.me/27726576102" target="_blank">
                     <button type="button">WhatsApp the Dealer</button>
                 </a>
-           <form action="/cars/<%= car._id %>/send-message" method="post">
-    <label for="name">Name *</label>
-    <input type="text" id="name" name="name" required>
+                <form action="/cars/<%= car._id %>/send-message" method="post">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
 
-    <label for="email">Email *</label>
-    <input type="email" id="email" name="email" required>
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
 
-    <label for="mobile">Mobile *</label>
-    <input type="tel" id="mobile" name="mobile" required>
+                    <label for="mobile">Mobile *</label>
+                    <input type="tel" id="mobile" name="mobile" required>
 
-    <label for="area">Area *</label>
-    <select id="area" name="area" required>
-        <option value="" disabled selected>Select your Location (province)</option>
-        <option value="eastern_cape">Eastern Cape</option>
-        <option value="free_state">Free State</option>
-        <option value="gauteng">Gauteng</option>
-        <option value="kwazulu_natal">KwaZulu-Natal</option>
-        <option value="limpopo">Limpopo</option>
-        <option value="mpumalanga">Mpumalanga</option>
-        <option value="north_west">North West</option>
-        <option value="northern_cape">Northern Cape</option>
-        <option value="western_cape">Western Cape</option>
-    </select>
+                    <label for="area">Area *</label>
+                    <select id="area" name="area" required>
+                        <option value="" disabled selected>Select your Location (province)</option>
+                        <option value="eastern_cape">Eastern Cape</option>
+                        <option value="free_state">Free State</option>
+                        <option value="gauteng">Gauteng</option>
+                        <option value="kwazulu_natal">KwaZulu-Natal</option>
+                        <option value="limpopo">Limpopo</option>
+                        <option value="mpumalanga">Mpumalanga</option>
+                        <option value="north_west">North West</option>
+                        <option value="northern_cape">Northern Cape</option>
+                        <option value="western_cape">Western Cape</option>
+                    </select>
 
-    <label for="message">Message</label>
-    <textarea id="message" name="message" rows="4"></textarea>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
 
-    <input type="hidden" id="applicantCount" name="applicantCount" value="<%= car.applicants.length %>">
-
-    <button type="submit">Send Message</button>
-</form>
-
+                    <button type="submit">Send Message</button>
+                </form>
             </div>
         </div>
     </div>
@@ -237,3 +234,4 @@
 </body>
 
 </html>
+
