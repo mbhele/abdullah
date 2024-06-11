@@ -468,6 +468,8 @@ router.get('/api/cars', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+
 router.post('/cars/:id/send-message', async (req, res) => {
     try {
         // Extract form data from request body
@@ -498,7 +500,7 @@ router.post('/cars/:id/send-message', async (req, res) => {
         const imageUrl = car.image[0].url;
         const mailOptions = {
             from: 'acauto86@gmail.com',
-            to: 'mbusiseni.mbhele@gmail.com',
+            to: 'acauto86@gmail.com',
             subject: 'I am interested in this car',
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #000; color: #fff; padding: 20px; border-radius: 8px; text-align: center;">
@@ -506,11 +508,15 @@ router.post('/cars/:id/send-message', async (req, res) => {
                     <h2 style="color: #25d366; margin-bottom: 10px;">Abdullah's Car Sales</h2>
                     <h3 style="color: #25d366; margin-bottom: 20px;">I am interested in this car</h3>
                     <p style="margin-bottom: 15px;">Name: ${name}</p>
-                    <p style="margin-bottom: 15px;">Email: ${email}</p>
+                    <p style="margin-bottom: 15px;">Email: 
+                        <a href="mailto:${email}" style="color: #25d366; text-decoration: none;">
+                            ${email}
+                        </a>
+                    </p>
                     <p style="margin-bottom: 15px;">Mobile: 
                         <a href="https://wa.me/${mobile}" style="color: #25d366; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 10px 15px; background-color: #fff; border-radius: 5px; margin-top: 5px;">
                             <img src="images/social.svg" alt="WhatsApp Icon" style="width: 20px; height: 20px; margin-right: 5px;">
-                            Contact on WhatsApp
+                            ${mobile} - Contact on WhatsApp
                         </a>
                     </p>
                     <p style="margin-bottom: 15px;">Area: ${area}</p>
@@ -530,9 +536,6 @@ router.post('/cars/:id/send-message', async (req, res) => {
         res.redirect(`/cars/${req.params.id}/show`);
     }
 });
-
-
-
 
 
 router.get('/aboutus', (req, res) => {
