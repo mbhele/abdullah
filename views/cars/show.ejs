@@ -210,6 +210,11 @@
                     <label for="mobile">Mobile *</label>
                     <input type="tel" id="mobile" name="mobile" required>
 
+                    <!-- WhatsApp Button -->
+                    <a id="whatsappButton" href="https://wa.me/27726576102?text=" target="_blank">
+                        <button type="button" style="margin-top: 10px;">WhatsApp the Dealer</button>
+                    </a>
+
                     <label for="area">Area *</label>
                     <select id="area" name="area" required>
                         <option value="" disabled selected>Select your Location (province)</option>
@@ -271,6 +276,11 @@
                     }
                 });
             });
+
+            // Set WhatsApp button message
+            var carName = "<%= car.name %>"; // Ensure car.name is available in your EJS context
+            var whatsappMessage = encodeURIComponent("Are you interested in " + carName + "?");
+            $('#whatsappButton').attr('href', 'https://wa.me/27726576102?text=' + whatsappMessage);
         });
     </script>
 </body>
