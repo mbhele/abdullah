@@ -468,7 +468,6 @@ router.get('/api/cars', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
 router.post('/cars/:id/send-message', async (req, res) => {
     try {
         // Extract form data from request body
@@ -519,13 +518,14 @@ router.post('/cars/:id/send-message', async (req, res) => {
         await transporter.sendMail(mailOptions);
 
         req.flash('success', 'Message sent successfully');
-        res.redirect(`/cars/${carId}/show`);
+        return res.status(200).json({ message: 'Message sent successfully' }); // Send success response
     } catch (error) {
-        console.error(error);
+        console.error('Error sending message:', error);
         req.flash('error', 'Something went wrong. Please try again later.');
-        res.redirect(`/cars/${req.params.id}/show`);
+        return res.status(500).json({ error: 'Something went wrong. Please try again later.' }); // Send error response
     }
 });
+
 
 router.get('/aboutus', (req, res) => {
     res.render('aboutUs'); // assuming your view file is named aboutUs.ejs
