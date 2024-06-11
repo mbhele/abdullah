@@ -473,7 +473,7 @@ router.get('/api/cars', async (req, res) => {
 router.post('/cars/:id/send-message', async (req, res) => {
     try {
         // Extract form data from request body
-        const { name, email, mobile, area, message } = req.body;
+        const { name, email, mobile, area, message, applicantCount } = req.body;
         const carId = req.params.id; // Extract car ID from params
 
         // Validate input fields (customize based on your schema)
@@ -482,12 +482,16 @@ router.post('/cars/:id/send-message', async (req, res) => {
             return res.redirect(`/cars/${carId}/show`); // Redirect to the car details page
         }
 
-        // Fetch the car details to get the image URL
+        // Fetch the car details to get the image URL and update the number of applicants
         const car = await Car.findById(carId);
         if (!car) {
             req.flash('error', 'Car not found'); // Flash an error message
             return res.redirect('/'); // Redirect to the home page or handle accordingly
         }
+
+        // Update applicant count
+        car.applicants.push({ name, email, mobile, area, message });
+        await car.save();
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -517,6 +521,7 @@ router.post('/cars/:id/send-message', async (req, res) => {
                     </p>
                     <p style="margin-bottom: 15px;">Area: ${area}</p>
                     <p style="margin-bottom: 15px;">Message: ${message}</p>
+                    <p style="margin-bottom: 15px;">Number of Applicants: ${applicantCount}</p>
                     <img src="${imageUrl}" alt="${car.name}'s Image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
                 </div>
             `
@@ -532,7 +537,6 @@ router.post('/cars/:id/send-message', async (req, res) => {
         res.redirect(`/cars/${req.params.id}/show`);
     }
 });
-
 
 router.get('/aboutus', (req, res) => {
     res.render('aboutUs'); // assuming your view file is named aboutUs.ejs
