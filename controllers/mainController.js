@@ -468,6 +468,8 @@ router.get('/api/cars', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+
 router.post('/cars/:id/send-message', async (req, res) => {
     try {
         // Extract form data from request body
@@ -517,7 +519,7 @@ router.post('/cars/:id/send-message', async (req, res) => {
                     <p style="margin-bottom: 15px;">Message: ${message}</p>
                     <img src="${car.image[0].url}" alt="${carName} Image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
                     <br><br>
-                    <a href="${whatsappLink}" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #25d366; color: #fff; text-decoration: none; border-radius: 5px;">
+                    <a href="${whatsappLink}" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #25d366; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;">
                         WhatsApp the Dealer
                     </a>
                 </div>
@@ -535,6 +537,9 @@ router.post('/cars/:id/send-message', async (req, res) => {
         return res.status(500).json({ error: 'Something went wrong. Please try again later.' });
     }
 });
+
+
+
 
 router.get('/aboutus', (req, res) => {
     res.render('aboutUs'); // assuming your view file is named aboutUs.ejs
