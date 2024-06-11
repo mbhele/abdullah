@@ -468,8 +468,6 @@ router.get('/api/cars', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
-
 router.post('/cars/:id/send-message', async (req, res) => {
     try {
         // Extract form data from request body
@@ -498,58 +496,43 @@ router.post('/cars/:id/send-message', async (req, res) => {
         });
 
         const imageUrl = car.image[0].url;
-   const mailOptions = {
-    from: 'acauto86@gmail.com',
-    to: 'acauto86@gmail.com',
-    subject: 'I am interested in this car',
-    html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #000; color: #fff; padding: 20px; border-radius: 8px; text-align: center;">
-            <img src="images/company-logo.svg" alt="Company Logo" style="max-width: 100px; margin-bottom: 15px;">
-            <h2 style="color: #25d366; margin-bottom: 10px;">Abdullah's Car Sales</h2>
-            <h3 style="color: #25d366; margin-bottom: 20px;">I am interested in this car</h3>
-            <p style="margin-bottom: 15px;">Name: ${name}</p>
-            <p style="margin-bottom: 15px;">Email: ${email}</p>
-            <p style="margin-bottom: 15px;">Mobile: 
-                <a href="https://wa.me/${mobile}" style="color: #25d366; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 10px 15px; background-color: #fff; border-radius: 5px; margin-top: 5px;">
-                    <img src="images/social.svg" alt="WhatsApp Icon" style="width: 20px; height: 20px; margin-right: 5px;">
-                    Contact on WhatsApp
-                </a>
-            </p>
-            <p style="margin-bottom: 15px;">Area: ${area}</p>
-            <p style="margin-bottom: 15px;">Message: ${message}</p>
-            <img src="${imageUrl}" alt="${car.name}'s Image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
-        </div>
-    `
-};
+        const mailOptions = {
+            from: 'acauto86@gmail.com',
+            to: 'acauto86@gmail.com',
+            subject: 'I am interested in this car',
+            html: `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #000; color: #fff; padding: 20px; border-radius: 8px; text-align: center;">
+                    <img src="images/company-logo.svg" alt="Company Logo" style="max-width: 100px; margin-bottom: 15px;">
+                    <h2 style="color: #25d366; margin-bottom: 10px;">Abdullah's Car Sales</h2>
+                    <h3 style="color: #25d366; margin-bottom: 20px;">I am interested in this car</h3>
+                    <p style="margin-bottom: 15px;">Name: ${name}</p>
+                    <p style="margin-bottom: 15px;">Email: ${email}</p>
+                    <p style="margin-bottom: 15px;">Mobile: 
+                        <a href="https://wa.me/${mobile}" style="color: #25d366; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 10px 15px; background-color: #fff; border-radius: 5px; margin-top: 5px;">
+                            <img src="images/social.svg" alt="WhatsApp Icon" style="width: 20px; height: 20px; margin-right: 5px;">
+                            Contact on WhatsApp
+                        </a>
+                    </p>
+                    <p style="margin-bottom: 15px;">Area: ${area}</p>
+                    <p style="margin-bottom: 15px;">Message: ${message}</p>
+                    <img src="${imageUrl}" alt="${car.name}'s Image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+                </div>
+            `
+        };
 
-        
-        
-        
-        
-        
-        
-        
+        await transporter.sendMail(mailOptions);
 
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.error('Error sending email:', error);
-                req.flash('error', 'Failed to send email notification');
-            } else {
-                console.log('Email sent:', info.response);
-                req.flash('success', 'Message sent successfully');
-                res.render('success'); // Render success.ejs upon successful email send
+        req.flash('success', 'Message sent successfully');
+        res.redirect(`/cars/${carId}/show`);
+    } catch (error) {
+        console.error(error);
+        req.flash('error', 'Something went wrong. Please try again later.');
+        res.redirect(`/cars/${req.params.id}/show`);
+    }
+});
 
-            }
-        });
-    } catch (error)
 
-{
-    console.error(error);
-    req.flash('error', 'Failed to send message');
-    res.redirect(`/cars/${carId}/show`); // Redirect to the car details page
-}
-}
-);
+
 
 
 router.get('/aboutus', (req, res) => {
