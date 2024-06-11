@@ -12,201 +12,253 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <style>
-        body {
-            background-color: #000000;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        .row {
-            display: flex;
-            justify-content: center;
-        }
-        .centeri {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            transform: scale(0.9);
-            position: relative;
-            top: -80px;
-        }
-        .fotorama {
-            width: 100%;
-            max-width: 600px;
-            margin-top: 2.4rem;
-        }
-        .contact-form {
-            max-width: 100%;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #333;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            color: #fff;
-        }
-        .button-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .delete-button,
-        .edit-button {
-            display: inline-block;
-            background-color: #25d366;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1.2em;
-            margin: 5px;
-        }
-        .delete-button:hover,
-        .edit-button:hover {
-            background-color: #128c7e;
-        }
-        .contact-form h2 {
-            color: #25d366;
-            margin-bottom: 20px;
-        }
-        .text-container {
-            text-align: center;
-            border: 2px solid white;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            color: white;
-        }
-        .text-container p {
-            margin: 0;
-            overflow: hidden;
-        }
-        .contact-form label {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
-            color: #25d366;
-        }
-        .contact-form label::after {
-            content: ":";
-            margin-right: 5px;
-        }
-        .contact-form input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #25d366;
-            border-radius: 4px;
-            background-color: #444;
-            color: #fff;
-            box-sizing: border-box;
-        }
-        .contact-form textarea,
-        .contact-form select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #25d366;
-            border-radius: 4px;
-            background-color: #444;
-            color: #fff;
-            box-sizing: border-box;
-        }
-        .contact-form textarea {
-            resize: vertical;
-        }
-        .contact-form label[for="area"],
-        .contact-form label[for="message"] {
-            display: flex;
-            align-items: flex-start;
-            margin-top: 10px;
-            color: #25d366;
-        }
-        .contact-form label[for="area"]::after,
-        .contact-form label[for="message"]::after {
-            content: ":";
-            margin-right: 5px;
-        }
-        @media (max-width: 768px) {
-            body {
-                height: 300vh;
-            }
-            .centeri {
-                grid-template-columns: 1fr;
-                display: grid;
-                place-items: center;
-                margin-left: 2rem;
-            }
-        }
+
+body {
+    background-color: #000000;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.centeri {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust the minmax values based on your preference */
+    gap: 20px;
+    max-width: 800px; /* Adjust the maximum width based on your preference */
+    margin: 0 auto;
+    padding: 20px;
+    transform: scale(0.9);
+    position: relative;
+    top: -80px;
+}
+
+
+.fotorama {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 2.4rem;
+}
+
+.contact-form {
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+
+.button-container {
+    text-align: center;
+    margin-top: 20px; /* Adjust the margin as needed */
+}
+
+.delete-button,
+.edit-button {
+    display: inline-block;
+    background-color: #25d366;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin: 5px; /* Add some margin between buttons */
+}
+
+.delete-button:hover,
+.edit-button:hover {
+    background-color: #128c7e;
+}
+.contact-form h2 {
+    color: #25d366;
+    margin-bottom: 20px;
+}
+
+.text-container {
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 20px; /* Adjust padding as needed */
+    margin: 20px 0; /* Adjust margin as needed */
+    color: white; /* Ensure text color is set within the container */
+}
+
+.text-container p {
+    margin: 0; /* Remove default margin to ensure better centering */
+    overflow: hidden;
+}
+
+.contact-form label {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    color: #25d366;
+}
+.contact-form label::after {
+    content: ":";
+    margin-right: 5px; /* Add some space between label and form field */
+}
+
+.contact-form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #25d366;
+    border-radius: 4px;
+    background-color: #444;
+    color: #fff;
+    box-sizing: border-box; /* Ensure padding and border are included in the total width */
+}
+/* ... Your other styles ... */
+.contact-form textarea,
+.contact-form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #25d366;
+    border-radius: 4px;
+    background-color: #444;
+    color: #fff;
+    box-sizing: border-box; /* Ensure padding and border are included in the total width */
+}
+
+.contact-form textarea {
+    resize: vertical; /* Allow vertical resizing of the textarea */
+}
+
+.contact-form label[for="area"],
+.contact-form label[for="message"] {
+    display: flex;
+    align-items: flex-start; /* Align label and input elements at the top */
+    margin-top: 10px;
+    color: #25d366;
+}
+
+.contact-form label[for="area"]::after,
+.contact-form label[for="message"]::after {
+    content: ":";
+    margin-right: 5px; /* Add some space between label and form field */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+
+    body{
+        height: 300vh;
+    }
+    .centeri {
+        grid-template-columns: 1fr; /* Stack on smaller screens */
+        display: grid;
+        place-items: center;
+        margin-left: 2rem;
+    }
+}
+  /* ... Your existing styles ... */
     </style>
 </head>
+
 <body>
     <%- include ('../partials/navigation.ejs') %>
-    <div class="button-container">
-        <% if (currentUser && currentUser._id.toString() === car.author._id.toString()) { %>
-            <form action="/cars/<%= car._id %>" method="POST" style="display: inline-block;">
-                <input type="hidden" name="_method" value="DELETE">
-                <button type="submit" class="delete-button" onclick="return confirm('Are you sure you want to delete this car?');">
-                    Delete
-                </button>
-            </form>
-            <a href="/cars/<%= car._id %>/edit" class="edit-button">Edit</a>
-        <% } %>
-    </div>
+
+
+    <!-- Display other details -->
+<!-- Add a container div for the buttons -->
+<div class="button-container">
+    <!-- Delete Car button -->
+    <% if (currentUser && currentUser._id.toString() === car.author._id.toString()) { %>
+        <form action="/cars/<%= car._id %>" method="POST" style="display: inline-block;">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="delete-button">Delete Car</button>
+        </form>
+    <% } %>
+
+    <!-- Edit Car button -->
+    <% if (currentUser && currentUser._id.toString() === car.author._id.toString()) { %>
+        <a href="/cars/<%= car._id %>/edit" class="edit-button">Edit Car</a>
+    <% } %>
+</div>
+
+<div class="text-container">
+    <p><%= name %></p>
+    <p><%= subject %></p>
+</div>
+
+
     <div class="row">
+        
         <div class="centeri">
-            <div class="fotorama" data-autoplay="true" data-stopautoplayontouch="false" data-loop="true">
-                <% car.image.forEach(image => { %>
-                    <img src="<%= image.url %>" alt="Car Image">
-                <% }) %>
+            <!-- Fotorama -->
+            <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true">
+                <% car.image.forEach(function(img, index) { %>
+                    <% if (index === 0) { %>
+                        <!-- Main Image -->
+                        <a href="<%= img.url %>">
+                            <img src="<%= img.url %>" alt="<%= name %>'s Image">
+                        </a>
+                    <% } else { %>
+                        <!-- Additional Images (Details) -->
+                        <a href="<%= img.url %>">
+                            <img src="<%= img.url %>" alt="<%= name %>'s Image">
+                        </a>
+                    <% } %>
+                <% }); %>
             </div>
+            <!-- Contact Form -->
             <div class="contact-form">
-                <h2>Contact Us</h2>
-                <form action="/cars/<%= car._id %>/send-message" method="POST">
-                    <div>
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div>
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div>
-                        <label for="mobile">Mobile</label>
-                        <input type="text" id="mobile" name="mobile" required>
-                    </div>
-                    <div>
-                        <label for="area">Area</label>
-                        <select id="area" name="area" required>
-                            <option value="">Select Area</option>
-                            <option value="Durban">Durban</option>
-                            <option value="Johannesburg">Johannesburg</option>
-                            <option value="Pretoria">Pretoria</option>
-                            <option value="Capetown">Capetown</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="4" required></textarea>
-                    </div>
-                    <div class="button-container">
-                        <button type="submit" class="edit-button">Send Message</button>
-                    </div>
-                </form>
-            </div>
-            <div class="text-container">
-                <h2 style="color:#25d366;"><%= car.name %></h2>
-                <h3 style="color:#25d366;">R<%= car.price %></h3>
-                <p>Year: <%= car.year %></p>
-                <p>Mileage: <%= car.mileage %></p>
-                <p>Fuel Type: <%= car.fuelType %></p>
-                <p>Transmission: <%= car.transmission %></p>
-                <p>Location: <%= car.location %></p>
-            </div>
+              <h2>Contact Asif</h2>
+              <p>27 72 657 * **** <br> </p>
+              <a href="https://wa.me/<YOUR_WHATSAPP_NUMBER>" target="_blank">
+                <button type="button">WhatsApp the Dealer</button>
+            </a>
+            <form action="/cars/<%= car._id %>/send-message" method="post">
+                  <label for="name">Name *</label>
+                  <input type="text" id="name" name="name" required>
+          
+                  <label for="email">Email *</label>
+                  <input type="email" id="email" name="email" required>
+          
+                  <label for="mobile">Mobile *</label>
+                  <input type="tel" id="mobile" name="mobile" required>
+          
+                  <label for="area">Area *</label>
+                  <select id="area" name="area" required>
+                      <option value="" disabled selected>Select your Location(province)</option>
+                      <option value="eastern_cape">Eastern Cape</option>
+                      <option value="free_state">Free State</option>
+                      <option value="gauteng">Gauteng</option>
+                      <option value="kwazulu_natal">KwaZulu-Natal</option>
+                      <option value="limpopo">Limpopo</option>
+                      <option value="mpumalanga">Mpumalanga</option>
+                      <option value="north_west">North West</option>
+                      <option value="northern_cape">Northern Cape</option>
+                      <option value="western_cape">Western Cape</option>
+                      
+                      <!-- Add more options as needed -->
+                  </select>
+          
+                  <label for="message">Message</label>
+                  <textarea id="message" name="message" rows="4"></textarea>
+          
+                  <button type="submit">Send Message</button>
+              </form>
+          </div>
         </div>
+
+        
+    </div>
+
+        <!-- Edit Car button (if the current user owns the car) -->
+        <!-- ... Your existing buttons ... -->
     </div>
     <%- include ('../partials/footer.ejs') %>
 
@@ -214,6 +266,7 @@
 
     <script>
         $(document).ready(function () {
+            // Custom navigation buttons functionality
             var fotorama = $('.fotorama').fotorama().data('fotorama');
 
             $('#prevButton').on('click', function () {
