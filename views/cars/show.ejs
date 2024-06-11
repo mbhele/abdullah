@@ -252,13 +252,23 @@
             $('#contactForm').on('submit', function (e) {
                 e.preventDefault(); // Prevent default form submission
 
-                $.post($(this).attr('action'), $(this).serialize(), function (response) {
-                    // Show notification
-                    $('#notification').fadeIn().delay(3000).fadeOut();
-                    // Redirect to the same page to clear form data
-                    window.location.href = window.location.href;
-                }).fail(function () {
-                    alert('Something went wrong. Please try again later.');
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        if (response.message) {
+                            // Show notification
+                            $('#notification').fadeIn().delay(3000).fadeOut(function () {
+                                window.location.href = window.location.href;
+                            });
+                        } else {
+                            alert('Something went wrong. Please try again later.');
+                        }
+                    },
+                    error: function () {
+                        alert('Something went wrong. Please try again later.');
+                    }
                 });
             });
         });
