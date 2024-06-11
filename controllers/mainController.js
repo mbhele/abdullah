@@ -474,58 +474,67 @@ router.post('/cars/:id/send-message', async (req, res) => {
         const { name, email, mobile, area, message } = req.body;
         const carId = req.params.id; // Extract car ID from params
 
-        // Validate input fields (customize based on your schema)
+        // Validate input fields
         if (!name || !email || !mobile || !area || !message) {
-            req.flash('error', 'All fields are required'); // Flash an error message
-            return res.redirect(`/cars/${carId}/show`); // Redirect to the car details page
+            req.flash('error', 'All fields are required');
+            return res.redirect(`/cars/${carId}/show`);
         }
 
-        // Fetch the car details to get the image URL
+        // Fetch the car details
         const car = await Car.findById(carId);
         if (!car) {
-            req.flash('error', 'Car not found'); // Flash an error message
-            return res.redirect('/'); // Redirect to the home page or handle accordingly
+            req.flash('error', 'Car not found');
+            return res.redirect('/');
         }
 
+        // Set up the email transporter
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
                 user: 'acauto86@gmail.com',
-                pass: 'pqgg lpgv ihqs ohfw' // replace with your Gmail password
+                pass: 'your-email-password'
             }
         });
 
-        const imageUrl = car.image[0].url;
+        const carName = car.name;
+        const whatsappMessage = encodeURIComponent(`I am interested in ${carName}. Please contact me.`);
+        const whatsappLink = `https://wa.me/27726576102?text=${whatsappMessage}`;
+
+        // Email options
         const mailOptions = {
             from: 'acauto86@gmail.com',
             to: 'mbusiseni.mbhele@gmail.com',
-            subject: 'I am interested in this car',
+            subject: `Inquiry about ${carName}`,
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #000; color: #fff; padding: 20px; border-radius: 8px; text-align: center;">
                     <img src="https://abdullahscarsales.co.za/images/logo2.png" alt="Company Logo" style="max-width: 100px; margin-bottom: 15px;">
                     <h2 style="color: #25d366; margin-bottom: 10px;">Abdullah's Car Sales</h2>
-                    <h3 style="color: #25d366; margin-bottom: 20px;">I am interested in this car</h3>
+                    <h3 style="color: #25d366; margin-bottom: 20px;">Inquiry about ${carName}</h3>
                     <p style="margin-bottom: 15px;">Name: ${name}</p>
                     <p style="margin-bottom: 15px;">Email: ${email}</p>
                     <p style="margin-bottom: 15px;">Mobile: ${mobile}</p>
                     <p style="margin-bottom: 15px;">Area: ${area}</p>
                     <p style="margin-bottom: 15px;">Message: ${message}</p>
-                    <img src="${imageUrl}" alt="${car.name}'s Image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+                    <img src="${car.image[0].url}" alt="${carName} Image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+                    <br><br>
+                    <a href="${whatsappLink}" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #25d366; color: #fff; text-decoration: none; border-radius: 5px;">
+                        WhatsApp the Dealer
+                    </a>
                 </div>
             `
         };
 
+        // Send the email
         await transporter.sendMail(mailOptions);
 
         req.flash('success', 'Message sent successfully');
-        return res.status(200).json({ message: 'Message sent successfully' }); // Send success response
+        return res.status(200).json({ message: 'Message sent successfully' });
     } catch (error) {
         console.error('Error sending message:', error);
         req.flash('error', 'Something went wrong. Please try again later.');
-        return res.status(500).json({ error: 'Something went wrong. Please try again later.' }); // Send error response
+        return res.status(500).json({ error: 'Something went wrong. Please try again later.' });
     }
 });
-
 
 router.get('/aboutus', (req, res) => {
     res.render('aboutUs'); // assuming your view file is named aboutUs.ejs
