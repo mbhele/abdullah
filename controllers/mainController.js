@@ -202,7 +202,7 @@ router.post('/cars/create', upload.array('carImage'),ensureAuthenticated, async 
 });
 
 
-router.get('/cars/:id', async (req, res) => {
+router.get('/cars/:id',ensureAuthenticated ,async (req, res) => {
     try {
         const car = await Car.findById(req.params.id).populate('author');
 
